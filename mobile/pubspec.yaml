@@ -26,6 +26,7 @@ dependencies:
   path_provider: ^2.0.15
   provider: ^6.0.5
   shared_preferences: ^2.1.0
+  dots_indicator: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -42,3 +43,4 @@ flutter:
 
   assets:
     - assets/lottie/
+    - assets/images/

@@ -9,7 +9,7 @@ class Themes {
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         color: Colors.black,
-        fontSize: 20,
+        fontSize: 28,
       ),
       displayMedium: TextStyle(
         color: Colors.black,
@@ -26,7 +26,7 @@ class Themes {
       ),
       titleLarge: TextStyle(
         color: Colors.black,
-        fontSize: 24,
+        fontSize: 40,
         fontWeight: FontWeight.w500,
       ),
       titleSmall: TextStyle(

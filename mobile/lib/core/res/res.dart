@@ -9,4 +9,13 @@ class Res {
   static const pageUnderConstruction =
       '$_baseLottie/page_under_construction.json';
 
+  static const gradientBackground =
+      '$_baseImage/gradient_background.png';
+
+  static const nathalieJane =
+      '$_baseImage/nathalie_jane.png';
+  static const deanLewis =
+      '$_baseImage/dean_lewis.png';
+  static const laurenSpencer =
+      '$_baseImage/lauren_spencer_smith.png';
 }
