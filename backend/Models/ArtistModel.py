@@ -1,7 +1,9 @@
-from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR, DATE
-from extensions import Base
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+from extensions import db
 
-class Artist(Base):
+
+class Artist(db.Model):
     __tablename__ = "artists"
 
     arid = Column("ArtistID", Integer, primary_key=True)
@@ -10,7 +12,8 @@ class Artist(Base):
     country = Column("Country", String)
     albumCnt = Column("Album Count", Integer)
 
-    # Foreign keys
+    # Define a relationship to the Album class
+    albums = relationship('Album', back_populates='artist')
 
     def __init__(self, arid, fullname, genre, country, albumCnt):
         self.arid = arid
