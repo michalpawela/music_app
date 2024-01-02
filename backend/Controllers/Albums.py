@@ -5,7 +5,7 @@ from extensions import db
 albums = Blueprint("albums", __name__)
 
 
-@albums.route('/update_album/<int:album_id>', methods=['PUT'])
+@albums.route('/<int:album_id>', methods=['PUT'])
 def update_album(album_id):
     # Get data from the request
     data = request.json  # Assuming the data is sent in JSON format
@@ -45,7 +45,7 @@ def update_album(album_id):
         return jsonify({'error': 'Album not found'}), 404  # 404 Not Found status code
 
 
-@albums.route('/delete_album/<int:album_id>', methods=['DELETE'])
+@albums.route('/<int:album_id>', methods=['DELETE'])
 def delete_album(album_id):
     # Check if the album exists
     album = Album.query.get(album_id)
@@ -59,7 +59,7 @@ def delete_album(album_id):
     return jsonify({'message': 'Album deleted successfully'}), 200  # 200 OK status code
 
 
-@albums.route('/create_album', methods=['POST'])
+@albums.route('/', methods=['POST'])
 def create_album():
     # Get data from the request
     data = request.json  # Assuming the data is sent in JSON format
@@ -88,7 +88,7 @@ def create_album():
     return jsonify({'album': album_data}), 201  # 201 Created status code
 
 
-@albums.route('/get_album/<int:album_id>', methods=['GET'])
+@albums.route('/<int:album_id>', methods=['GET'])
 def get_album(album_id):
     album = Album.query.get(album_id)
     if album:
@@ -104,7 +104,7 @@ def get_album(album_id):
         return jsonify({'error': 'Album not found'}), 404
 
 
-@albums.route('/get_albums', methods=['GET'])
+@albums.route('/', methods=['GET'])
 def get_albums():
     albums = Album.query.all()
     # Serialize data into JSON

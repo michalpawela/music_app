@@ -5,7 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/albums/create_album": {
+    "/albums": {
       "post": {
         "summary": "Create a new album.",
         "description": "Create a new album in the database.",
@@ -33,9 +33,24 @@
             "description": "Invalid request data."
           }
         }
+      },
+      "get": {
+        "summary": "Get all albums.",
+        "description": "Retrieve details of all albums in the database.",
+        "responses": {
+          "200": {
+            "description": "List of albums.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Album"
+              }
+            }
+          }
+        }
       }
     },
-    "/albums/update_album/{album_id}": {
+    "/albums/{album_id}": {
       "put": {
         "summary": "Update an existing album by ID.",
         "description": "Update an existing album in the database by providing an AlbumID.",
@@ -70,9 +85,7 @@
             "description": "Album not found."
           }
         }
-      }
-    },
-    "/albums/get_album/{album_id}": {
+      },
       "get": {
         "summary": "Get album by ID.",
         "description": "Retrieve album details by providing an AlbumID.",
@@ -94,23 +107,6 @@
           },
           "404": {
             "description": "Album not found."
-          }
-        }
-      }
-    },
-    "/albums/get_albums": {
-      "get": {
-        "summary": "Get all albums.",
-        "description": "Retrieve details of all albums in the database.",
-        "responses": {
-          "200": {
-            "description": "List of albums.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Album"
-              }
-            }
           }
         }
       }
