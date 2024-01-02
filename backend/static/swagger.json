@@ -35,6 +35,43 @@
         }
       }
     },
+    "/albums/update_album/{album_id}": {
+      "put": {
+        "summary": "Update an existing album by ID.",
+        "description": "Update an existing album in the database by providing an AlbumID.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "album_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "AlbumID of the desired album."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for updating an existing album",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAlbumData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Album updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Album"
+            }
+          },
+          "404": {
+            "description": "Album not found."
+          }
+        }
+      }
+    },
     "/albums/get_album/{album_id}": {
       "get": {
         "summary": "Get album by ID.",
@@ -81,6 +118,23 @@
   },
   "definitions": {
     "CreateAlbumData": {
+      "type": "object",
+      "properties": {
+        "Title": {
+          "type": "string"
+        },
+        "PublishingDate": {
+          "type": "string"
+        },
+        "ArtistID": {
+          "type": "integer"
+        },
+        "GenreID": {
+          "type": "integer"
+        }
+      }
+    },
+    "UpdateAlbumData": {
       "type": "object",
       "properties": {
         "Title": {

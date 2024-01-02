@@ -5,6 +5,60 @@ from extensions import db
 albums = Blueprint("albums", __name__)
 
 
+@albums.route('/update_album/<int:album_id>', methods=['PUT'])
+def update_album(album_id):
+    # Get data from the request
+    data = request.json  # Assuming the data is sent in JSON format
+    title = data.get('Title')
+    publishingDate = data.get('PublishingDate')
+    artistId = data.get('ArtistID')
+    genreId = data.get('GenreID')
+
+    # Find the existing album in the database
+    existing_album = Album.query.get(album_id)
+
+    # Check if the album exists
+    if existing_album:
+        # Update the album attributes if the corresponding data is provided in the request
+        if title:
+            existing_album.title = title
+        if publishingDate:
+            existing_album.publishingDate = publishingDate
+        if artistId:
+            existing_album.artistId = artistId
+        if genreId:
+            existing_album.genreId = genreId
+
+        # Commit the changes to the database
+        db.session.commit()
+
+        # Return the updated album data
+        album_data = {
+            'Title': existing_album.title,
+            'PublishingDate': existing_album.publishingDate,
+            'ArtistID': existing_album.artistId,
+            'GenreID': existing_album.genreId
+        }
+
+        return jsonify({'album': album_data}), 200  # 200 OK status code
+    else:
+        return jsonify({'error': 'Album not found'}), 404  # 404 Not Found status code
+
+
+@albums.route('/delete_album/<int:album_id>', methods=['DELETE'])
+def delete_album(album_id):
+    # Check if the album exists
+    album = Album.query.get(album_id)
+    if album is None:
+        return jsonify({'error': 'Album not found'}), 404  # 404 Not Found status code
+
+    # Delete the album from the database
+    db.session.delete(album)
+    db.session.commit()
+
+    return jsonify({'message': 'Album deleted successfully'}), 200  # 200 OK status code
+
+
 @albums.route('/create_album', methods=['POST'])
 def create_album():
     # Get data from the request
