@@ -1,6 +1,6 @@
-from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR, DATE
+from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR, DATE, Table
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 import psycopg2
 
 conn = psycopg2.connect(host = "localhost",
@@ -60,8 +60,7 @@ class Artist(Base):
     ArtistID = Column("ArtistID", Integer, primary_key=True)
     Full_Name = Column("Full name", String)  
     Country = Column("Country", String)
-    Album_Count = Column("Album Count", Integer)
-    Photo = Column("Photo", String)
+    PhotoPath = Column("PhotoPath", String)
     #Foreign keys
     GenreID = Column("GenreID", ForeignKey(Genre.GenreID))
     
@@ -70,7 +69,6 @@ class Artist(Base):
         self.ArtistID = ArtistID
         self.Full_Name = Full_Name
         self.Country = Country
-        self.Album_Count = Album_Count
         self.Photo = Photo
         self.GenreID = GenreID
         
@@ -84,7 +82,7 @@ class Album(Base):
     AlbumID = Column("AlbumID", Integer, primary_key=True)
     Title = Column("Title", String)
     Publishing_Date = Column("Publishing Date", String)
-    Cover = Column("Cover", String)
+    CoverPath = Column("Cover Path", String)
     #Foreign keys
     ArtistID = Column("ArtistID", ForeignKey(Artist.ArtistID))
     GenreID = Column("GenreID", ForeignKey(Genre.GenreID))    
@@ -97,6 +95,14 @@ class Album(Base):
         self.Cover = Cover
         self.ArtistID = ArtistID
         self.GenreID = GenreID
+
+
+songPlaylistAssociation = Table(
+    'Song Playlist Association',
+    Base.metadata,
+    Column('SongID', Integer, ForeignKey('songs.SongID')),
+    Column('PlaylistID', Integer, ForeignKey('playlists.PlaylistID'))
+)
 
 
 class Song(Base):
@@ -119,6 +125,8 @@ class Song(Base):
         self.ArtistID = ArtistID
         self.AlbumID = AlbumID
 
+    playlists = relationship('Playlist', secondary=songPlaylistAssociation, back_populates='songs')
+
 
 class Playlist(Base):
     __tablename__ = "playlists"
@@ -128,17 +136,17 @@ class Playlist(Base):
 
     #Foreign keys
     UserID = Column("UserID", ForeignKey(User.UserID))
-    SongID = Column("SongID", ForeignKey(Song.SongID))
     
     def __init__(self,PlaylistID,Name,UserID,SongID):
         
         self.PlaylistID = PlaylistID
         self.Name = Name
         self.UserID = UserID
-        self.SongID = SongID
-    
 
-engine = create_engine('postgresql://postgres:ppliowap@localhost/ppliowap', echo=True)
+    songs = relationship('Song', secondary=songPlaylistAssociation, back_populates='playlists')
+
+
+engine = create_engine('postgresql://postgres:Dupeczka1234@localhost/ppliowap', echo=True)
 Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)
