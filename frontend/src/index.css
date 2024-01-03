@@ -7,6 +7,10 @@
   @apply text-cyan-500;
 }
 
+.inactive {
+  @apply text-gray-300
+}
+
 .active svg {
   @apply text-cyan-500;
 }

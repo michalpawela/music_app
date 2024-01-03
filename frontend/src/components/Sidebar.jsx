@@ -7,11 +7,13 @@ import { links } from "../assets/constants";
 
 const NavLinks = ({ handleClick }) => (
   <div className="mt-10">
-    {links.map((item) => (
+    {links.map((item,index) => (
       <NavLink
         key={item.name}
         to={item.to}
-        className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-cyan-400"
+        className={`flex flex-row justify-start items-center my-8 text-sm font-medium ${
+            location.pathname === item.to ? "text-cyan-400" : "text-gray-400"
+        } hover:text-cyan-400`}
         onClick={() => handleClick && handleClick()}
       >
         <item.icon className="w-6 h-6 mr-2" />
@@ -27,7 +29,7 @@ const Sidebar = () => {
     <>
       <div className="md:flex hidden flex-col w-[240px] py-10 px-4 bg-[#1B1524] ">
         {/* <img src={logo} alt="logo" className="w-full h-14 object-contain" /> */}
-        <NavLinks />
+          <NavLinks />
       </div>
 
       <div className="absolute md:hidden block top-6 right-3">
