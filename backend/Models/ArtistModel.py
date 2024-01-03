@@ -13,9 +13,9 @@ class Artist(db.Model):
     # Foreign keys
     GenreID = Column("GenreID", ForeignKey(Genre.GenreID))
 
-    def __init__(self, Full_Name, Country, PhotoPath, GenreID):
+    def __init__(self, Full_Name, Country, Photo, GenreID):
         self.Full_Name = Full_Name
         self.Country = Country
-        self.PhotoPath = PhotoPath
+        self.Photo = Photo
         self.GenreID = GenreID
 

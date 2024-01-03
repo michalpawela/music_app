@@ -110,7 +110,219 @@
           }
         }
       }
+    },
+    "/genres": {
+      "post": {
+        "summary": "Create a new genre.",
+        "description": "Create a new genre in the database.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for creating a new genre",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateGenreData"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Genre created successfully.",
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          },
+          "400": {
+            "description": "Invalid request data."
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all genres.",
+        "description": "Retrieve details of all genres in the database.",
+        "responses": {
+          "200": {
+            "description": "List of genres.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Genre"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/genres/{genre_id}": {
+      "put": {
+        "summary": "Update an existing genre by ID.",
+        "description": "Update an existing genre in the database by providing a GenreID.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "genre_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "GenreID of the desired genre."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for updating an existing genre",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateGenreData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Genre updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          },
+          "404": {
+            "description": "Genre not found."
+          }
+        }
+      },
+      "get": {
+        "summary": "Get genre by ID.",
+        "description": "Retrieve genre details by providing a GenreID.",
+        "parameters": [
+          {
+            "name": "genre_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "GenreID of the desired genre."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Genre data.",
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          },
+          "404": {
+            "description": "Genre not found."
+          }
+        }
+      }
+    },
+    "/artists": {
+  "post": {
+    "summary": "Create a new artist.",
+    "description": "Create a new artist in the database.",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "parameters": [
+      {
+        "name": "body",
+        "in": "body",
+        "description": "JSON data for creating a new artist",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/CreateArtistData"
+        }
+      }
+    ],
+    "responses": {
+      "201": {
+        "description": "Artist created successfully.",
+        "schema": {
+          "$ref": "#/definitions/Artist"
+        }
+      },
+      "400": {
+        "description": "Invalid request data."
+      }
     }
+  },
+  "get": {
+    "summary": "Get all artists.",
+    "description": "Retrieve details of all artists in the database.",
+    "responses": {
+      "200": {
+        "description": "List of artists.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Artist"
+          }
+        }
+      }
+    }
+  }
+},
+    "/artists/{artist_id}": {
+  "put": {
+    "summary": "Update an existing artist by ID.",
+    "description": "Update an existing artist in the database by providing an ArtistID.",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "parameters": [
+      {
+        "name": "artist_id",
+        "in": "path",
+        "type": "integer",
+        "required": true,
+        "description": "ArtistID of the desired artist."
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "description": "JSON data for updating an existing artist",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/UpdateArtistData"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Artist updated successfully.",
+        "schema": {
+          "$ref": "#/definitions/Artist"
+        }
+      },
+      "404": {
+        "description": "Artist not found."
+      }
+    }
+  },
+  "get": {
+    "summary": "Get artist by ID.",
+    "description": "Retrieve artist details by providing an ArtistID.",
+    "parameters": [
+      {
+        "name": "artist_id",
+        "in": "path",
+        "type": "integer",
+        "required": true,
+        "description": "ArtistID of the desired artist."
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Artist data.",
+        "schema": {
+          "$ref": "#/definitions/Artist"
+        }
+      },
+      "404": {
+        "description": "Artist not found."
+      }
+    }
+  }
+}
   },
   "definitions": {
     "CreateAlbumData": {
@@ -165,7 +377,87 @@
         "GenreID": {
           "type": "integer"
         }
-      }
+        }
+        },
+    "CreateGenreData": {
+        "type": "object",
+        "properties": {
+        "Name": {
+        "type": "string"
+        }
+        }
+        },
+    "UpdateGenreData": {
+        "type": "object",
+        "properties": {
+        "Name": {
+        "type": "string"
+        }
+        }
+        },
+    "Genre": {
+        "type": "object",
+        "properties": {
+        "GenreID": {
+        "type": "integer"
+        },
+        "Name": {
+        "type": "string"
+        }}},
+    "CreateArtistData": {
+  "type": "object",
+  "properties": {
+    "Full_Name": {
+      "type": "string"
+    },
+    "Country": {
+      "type": "string"
+    },
+    "Photo": {
+      "type": "string"
+    },
+    "GenreID": {
+      "type": "integer"
+    }
+  }
+},
+    "UpdateArtistData": {
+  "type": "object",
+  "properties": {
+    "Full_Name": {
+      "type": "string"
+    },
+    "Country": {
+      "type": "string"
+    },
+    "Photo": {
+      "type": "string"
+    },
+    "GenreID": {
+      "type": "integer"
+    }
+  }
+},
+    "Artist": {
+  "type": "object",
+  "properties": {
+    "ArtistID": {
+      "type": "integer"
+    },
+    "Full_Name": {
+      "type": "string"
+    },
+    "Country": {
+      "type": "string"
+    },
+    "Photo": {
+      "type": "string"
+    },
+    "GenreID": {
+      "type": "integer"
     }
   }
 }
+  }
+}
+
