@@ -112,6 +112,7 @@ class Song(Base):
     Title = Column("Title", String)
     Upload_Date = Column("Upload Date", String)
     Song_Filepath = Column("Song Filepath", String)
+    Description = Column("Description", String)
     #Foreign keys
     ArtistID = Column("ArtistID", ForeignKey(Artist.ArtistID))
     AlbumID = Column("AlbumID", ForeignKey(Album.AlbumID))
