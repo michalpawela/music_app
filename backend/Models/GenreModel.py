@@ -6,10 +6,11 @@ from extensions import db
 class Genre(db.Model):
     __tablename__ = "genres"
 
-    genreId = Column("GenreID", Integer, primary_key=True)
-    name = Column("Name", String)
+    GenreID = Column("GenreID", Integer, primary_key=True)
+    Name = Column("Name", String)
 
+    # Foreign keys
 
-    def __init__(self, genreId, name):
-        self.gid = genreId
-        self.name = name
+    def __init__(self, GenreID, Name):
+        self.GenreID = GenreID
+        self.Name = Name

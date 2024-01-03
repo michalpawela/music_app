@@ -8,19 +8,18 @@ from .GenreModel import Genre
 class Album(db.Model):
     __tablename__ = "albums"
 
-    albumId = Column("AlbumID", Integer, primary_key=True)
-    title = Column("Title", String)
-    publishingDate = Column("Publishing Date", DATE)
-
+    AlbumID = Column("AlbumID", Integer, primary_key=True)
+    Title = Column("Title", String)
+    Publishing_Date = Column("Publishing Date", String)
+    CoverPath = Column("Cover Path", String)
     # Foreign keys
-    artistId = Column("ArtistID", Integer, ForeignKey("artists.ArtistID"))
-    genreId = Column("GenreID", Integer, ForeignKey("genres.GenreID"))
+    ArtistID = Column("ArtistID", ForeignKey(Artist.ArtistID))
+    GenreID = Column("GenreID", ForeignKey(Genre.GenreID))
 
-    # Define a relationship to the Artist class
-    artist = relationship('Artist', back_populates='albums')
-
-    def __init__(self, title, publishingDate, artistId, genreId):
-        self.title = title
-        self.publishingDate = publishingDate
-        self.artistId = artistId
-        self.genreId = genreId
+    def __init__(self, AlbumID, Title, Publishing_Date, Cover, ArtistID, GenreID):
+        self.AlbumID = AlbumID
+        self.Title = Title
+        self.Publishing_Date = Publishing_Date
+        self.Cover = Cover
+        self.ArtistID = ArtistID
+        self.GenreID = GenreID
