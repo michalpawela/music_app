@@ -6,7 +6,7 @@ import psycopg2
 conn = psycopg2.connect(host = "localhost",
                         dbname = "ppliowap",
                         user = "postgres",
-                        password = "ppliowap",
+                        password = "Dupeczka1234",
                         port = 5432)
 
 conn.close()
@@ -60,7 +60,7 @@ class Artist(Base):
     ArtistID = Column("ArtistID", Integer, primary_key=True)
     Full_Name = Column("Full name", String)  
     Country = Column("Country", String)
-    PhotoPath = Column("PhotoPath", String)
+    Photo = Column("Photo", String)
     #Foreign keys
     GenreID = Column("GenreID", ForeignKey(Genre.GenreID))
     
@@ -82,7 +82,7 @@ class Album(Base):
     AlbumID = Column("AlbumID", Integer, primary_key=True)
     Title = Column("Title", String)
     Publishing_Date = Column("Publishing Date", String)
-    CoverPath = Column("Cover Path", String)
+    Cover = Column("Cover", String)
     #Foreign keys
     ArtistID = Column("ArtistID", ForeignKey(Artist.ArtistID))
     GenreID = Column("GenreID", ForeignKey(Genre.GenreID))    
@@ -153,16 +153,6 @@ Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-
-gen1 = Genre(101, "Hip-Hop")
-gen2 = Genre(102, "Pop")
-gen3 = Genre(103, "Rock")
-
-ar1 = Artist(101, "Grubson", "Poland", 6, "./artists/grubson.jpg", 101)
-ar2 = Artist(102, "Adi Nowak", "Poland", 5, "./artists/adinowak.jpg", 101)
-ar3 = Artist(103, "Doja Cat", "USA", 3, "./artists/dojacat", 101)
-
-session.add_all([gen1, gen2, gen3, ar1, ar2, ar3])
 # song1 = Song(101, "Emotikony", "2020", "./songs/emotikony.mp3")
 # song2 = Song(102, "Na szczycie" "2009", "./songs/naszczycie.mp3")
 # song3 = Song(103, "Nie, nie, nie", "2009", "./songs/nienienie.mp3")

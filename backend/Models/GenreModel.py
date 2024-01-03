@@ -11,6 +11,5 @@ class Genre(db.Model):
 
     # Foreign keys
 
-    def __init__(self, GenreID, Name):
-        self.GenreID = GenreID
+    def __init__(self, Name):
         self.Name = Name

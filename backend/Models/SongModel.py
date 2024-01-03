@@ -1,9 +1,11 @@
 from sqlalchemy import Column, Integer, String, Date, ForeignKey, DATE
 from sqlalchemy.orm import relationship
 from extensions import db
+from ArtistModel import Artist
+from AlbumModel import Album
 
 
-class Song(Base):
+class Song(db.Model):
     __tablename__ = "songs"
 
     SongID = Column("SongID", Integer, primary_key=True)
@@ -22,5 +24,3 @@ class Song(Base):
         self.Song_Filepath = Song_Filepath
         self.ArtistID = ArtistID
         self.AlbumID = AlbumID
-
-    playlists = relationship('Playlist', secondary=songPlaylistAssociation, back_populates='songs')

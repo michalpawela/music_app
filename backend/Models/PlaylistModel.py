@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Integer, String, Date, ForeignKey, DATE
 from sqlalchemy.orm import relationship
 from extensions import db
+from UserModel import User
 
-
-class Playlist(Base):
+class Playlist(db.Model):
     __tablename__ = "playlists"
 
     PlaylistID = Column("PlaylistID", Integer, primary_key=True)
@@ -16,5 +16,3 @@ class Playlist(Base):
         self.PlaylistID = PlaylistID
         self.Name = Name
         self.UserID = UserID
-
-    songs = relationship('Song', secondary=songPlaylistAssociation, back_populates='playlists')

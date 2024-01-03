@@ -11,15 +11,14 @@ class Album(db.Model):
     AlbumID = Column("AlbumID", Integer, primary_key=True)
     Title = Column("Title", String)
     Publishing_Date = Column("Publishing Date", String)
-    CoverPath = Column("Cover Path", String)
+    Cover = Column("Cover", String)
     # Foreign keys
     ArtistID = Column("ArtistID", ForeignKey(Artist.ArtistID))
     GenreID = Column("GenreID", ForeignKey(Genre.GenreID))
 
-    def __init__(self, AlbumID, Title, Publishing_Date, Cover, ArtistID, GenreID):
-        self.AlbumID = AlbumID
+    def __init__(self, Title, Publishing_Date, CoverPath, ArtistID, GenreID):
         self.Title = Title
         self.Publishing_Date = Publishing_Date
-        self.Cover = Cover
+        self.CoverPath = CoverPath
         self.ArtistID = ArtistID
         self.GenreID = GenreID
