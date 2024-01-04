@@ -11,7 +11,6 @@ Base = declarative_base()
 Session = sessionmaker(bind=engine)
 session = Session()
 
-data_directory = 'C:\\dataMusicProject'
-covers_imgs_directory = os.path.join(data_directory, 'cover_imgs')
-artists_imgs_directory = os.path.join(data_directory, 'artists_imgs')
+data_directory = 'C:\\dataMusicApp'
 songs_directory = os.path.join(data_directory, 'songs')
+allowed_extensions = {'mp3'}
