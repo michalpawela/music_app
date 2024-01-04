@@ -16,9 +16,9 @@ class Album(db.Model):
     ArtistID = Column("ArtistID", ForeignKey(Artist.ArtistID))
     GenreID = Column("GenreID", ForeignKey(Genre.GenreID))
 
-    def __init__(self, Title, Publishing_Date, CoverPath, ArtistID, GenreID):
+    def __init__(self, Title, Publishing_Date, Cover, ArtistID, GenreID):
         self.Title = Title
         self.Publishing_Date = Publishing_Date
-        self.CoverPath = CoverPath
+        self.Cover = Cover
         self.ArtistID = ArtistID
         self.GenreID = GenreID

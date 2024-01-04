@@ -7,6 +7,7 @@
   "paths": {
     "/albums": {
       "post": {
+        "tags": ["albums"],
         "summary": "Create a new album.",
         "description": "Create a new album in the database.",
         "consumes": ["application/json"],
@@ -35,6 +36,7 @@
         }
       },
       "get": {
+        "tags": ["albums"],
         "summary": "Get all albums.",
         "description": "Retrieve details of all albums in the database.",
         "responses": {
@@ -52,6 +54,7 @@
     },
     "/albums/{album_id}": {
       "put": {
+        "tags": ["albums"],
         "summary": "Update an existing album by ID.",
         "description": "Update an existing album in the database by providing an AlbumID.",
         "consumes": ["application/json"],
@@ -87,6 +90,7 @@
         }
       },
       "get": {
+        "tags": ["albums"],
         "summary": "Get album by ID.",
         "description": "Retrieve album details by providing an AlbumID.",
         "parameters": [
@@ -109,10 +113,36 @@
             "description": "Album not found."
           }
         }
+      },
+      "delete": {
+        "tags": ["albums"],
+        "summary": "Delete album by ID.",
+        "description": "Delete album by providing an AlbumID.",
+        "parameters": [
+          {
+            "name": "album_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "AlbumID of the undesired album."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Album data.",
+            "schema": {
+              "$ref": "#/definitions/Album"
+            }
+          },
+          "404": {
+            "description": "Album not found."
+          }
+        }
       }
     },
     "/genres": {
       "post": {
+        "tags": ["genres"],
         "summary": "Create a new genre.",
         "description": "Create a new genre in the database.",
         "consumes": ["application/json"],
@@ -141,6 +171,7 @@
         }
       },
       "get": {
+        "tags": ["genres"],
         "summary": "Get all genres.",
         "description": "Retrieve details of all genres in the database.",
         "responses": {
@@ -158,6 +189,7 @@
     },
     "/genres/{genre_id}": {
       "put": {
+        "tags": ["genres"],
         "summary": "Update an existing genre by ID.",
         "description": "Update an existing genre in the database by providing a GenreID.",
         "consumes": ["application/json"],
@@ -193,6 +225,7 @@
         }
       },
       "get": {
+        "tags": ["genres"],
         "summary": "Get genre by ID.",
         "description": "Retrieve genre details by providing a GenreID.",
         "parameters": [
@@ -215,10 +248,36 @@
             "description": "Genre not found."
           }
         }
+      },
+      "delete": {
+        "tags": ["genres"],
+        "summary": "Delete genre by ID.",
+        "description": "Delete genre by providing an GenreID.",
+        "parameters": [
+          {
+            "name": "genre_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "GenreID of the undesired genre."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Genre data.",
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          },
+          "404": {
+            "description": "Genre not found."
+          }
+        }
       }
     },
     "/artists": {
   "post": {
+    "tags": ["artists"],
     "summary": "Create a new artist.",
     "description": "Create a new artist in the database.",
     "consumes": ["application/json"],
@@ -247,6 +306,7 @@
     }
   },
   "get": {
+    "tags": ["artists"],
     "summary": "Get all artists.",
     "description": "Retrieve details of all artists in the database.",
     "responses": {
@@ -264,6 +324,7 @@
 },
     "/artists/{artist_id}": {
   "put": {
+    "tags": ["artists"],
     "summary": "Update an existing artist by ID.",
     "description": "Update an existing artist in the database by providing an ArtistID.",
     "consumes": ["application/json"],
@@ -299,6 +360,7 @@
     }
   },
   "get": {
+    "tags": ["artists"],
     "summary": "Get artist by ID.",
     "description": "Retrieve artist details by providing an ArtistID.",
     "parameters": [
@@ -321,8 +383,33 @@
         "description": "Artist not found."
       }
     }
-  }
-}
+  },
+      "delete": {
+        "tags": ["artists"],
+        "summary": "Delete artist by ID.",
+        "description": "Delete artist by providing an ArtistID.",
+        "parameters": [
+          {
+            "name": "artist_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "ArtistID of the undesired artist."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artist data.",
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            }
+          },
+          "404": {
+            "description": "Artist not found."
+          }
+        }
+      }
+    }
   },
   "definitions": {
     "CreateAlbumData": {
@@ -331,7 +418,10 @@
         "Title": {
           "type": "string"
         },
-        "PublishingDate": {
+        "Publishing_Date": {
+          "type": "string"
+        },
+        "Cover": {
           "type": "string"
         },
         "ArtistID": {
@@ -348,7 +438,10 @@
         "Title": {
           "type": "string"
         },
-        "PublishingDate": {
+        "Publishing_Date": {
+          "type": "string"
+        },
+        "Cover": {
           "type": "string"
         },
         "ArtistID": {
@@ -368,7 +461,10 @@
         "Title": {
           "type": "string"
         },
-        "PublishingDate": {
+        "Publishing_Date": {
+          "type": "string"
+        },
+        "Cover": {
           "type": "string"
         },
         "ArtistID": {
