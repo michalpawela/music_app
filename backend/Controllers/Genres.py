@@ -1,5 +1,5 @@
 from flask import jsonify, Blueprint, request
-from Models.GenreModel import Genre # Assuming your model is in a module named 'models'
+from Models.GenreModel import Genre
 from extensions import db
 
 genres = Blueprint("genres", __name__)
