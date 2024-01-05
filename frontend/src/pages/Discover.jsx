@@ -6,18 +6,22 @@ import {
   useGetTopChartsQuery,
 } from "../redux/services/shazamCore";
 import { selectGenreListId } from "../redux/features/playerSlice";
+import useGetAllGenres from "../hooks/genre/useGetAllGenres";
 
 const Discover = () => {
   const dispatch = useDispatch();
   const { activeSong, isPlaying, genreListId } = useSelector(
     (state) => state.player
   );
-  const { data, isFetching, error } = useGetSongsByGenreQuery(
+  const { data, isFetching } = useGetSongsByGenreQuery(
     genreListId || "POP"
   );
   const genreTitle = genres.find(({ value }) => value === genreListId)?.title;
 
-  if (isFetching) return <Loader title="Loading songs..." />;
+  const {genresV2, loading,error} = useGetAllGenres();
+  console.log(genresV2)
+
+  if (loading) return <Loader title="Loading songs..." />;
 
   if (error) return <Error />;
 
