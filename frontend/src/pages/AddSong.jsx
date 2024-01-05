@@ -1,7 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 
 const AddSong = () => {
+    const [file, setFile] = useState(null);
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        setFile(file);
+        console.log(file.type)
+    };
+
     return (
         <div className="mt-10">
             <form>
@@ -77,7 +84,8 @@ const AddSong = () => {
                                                 className="relative cursor-pointer rounded-md bg-gray-900 font-semibold text-white"
                                             >
                                                 <span className="p-3 focus:ring-0">Upload a file</span>
-                                                <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                                <input id="file-upload" name="file-upload" type="file" accept="audio/mp3"
+                                                       onChange={handleFileChange} className="sr-only"  />
                                             </label>
                                             <p className="pl-1">or drag and drop</p>
                                         </div>
