@@ -455,6 +455,48 @@
           }
         }
       }
+      },
+      "get": {
+        "summary": "Get all songs",
+        "description": "Retrieve details of all songs in the database.",
+      "tags": ["songs"],
+      "responses": {
+        "200": {
+          "description": "List of songs",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Song"
+            }
+          }
+        }
+      }
+      }
+    },
+    "/songs/{song_id}": {"get": {
+        "tags": ["songs"],
+        "summary": "Get song by ID.",
+        "description": "Retrieve song details by providing a SongID.",
+        "parameters": [
+          {
+            "name": "song_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "SongID of the desired song."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Song data.",
+            "schema": {
+              "$ref": "#/definitions/Song"
+            }
+          },
+          "404": {
+            "description": "Song not found."
+          }
+        }
       }}
   },
   "definitions": {
@@ -626,7 +668,7 @@
         "SongID": {"type": "integer"},
         "Title": {"type": "string"},
         "Upload_Date": {"type": "string"},
-        "Song_Filepath": {"type": "string"},
+        "Song_base64": {"type": "string"},
         "Description": {"type": "string"},
         "ArtistID": {"type": "integer"},
         "AlbumID": {"type": "integer"}

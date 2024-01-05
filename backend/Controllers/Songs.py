@@ -16,16 +16,25 @@ songs = Blueprint("songs", __name__)
 def get_song(song_id):
     try:
         song = Song.query.filter_by(SongID=song_id).one()
-        song_data = {
+        song_file_path_base64 = song.Song_Filepath
+        bytes_song = bytes.fromhex(song_file_path_base64.replace('\\x', ''))
+        song_file_path = base64.b64decode(bytes_song)
+
+        with open(song_file_path, "rb") as mp3_file:
+            binary_song = mp3_file.read()
+            song_base64 = base64.b64encode(binary_song)
+            song_base64_str = song_base64.decode('utf-8')
+
+        songs_data = {
             'SongID': song.SongID,
             'Title': song.Title,
             'Upload_Date': song.Upload_Date,
-            'Song': song.Song_Filepath,
+            'Song': song_base64_str,
             'Description': song.Description,
             'ArtistID': song.ArtistID,
             'AlbumID': song.AlbumID
         }
-        return jsonify({'song': song_data})
+        return jsonify({'songs': songs_data})
     except NoResultFound:
         return jsonify({'error': 'Song not found'}), 404
 
@@ -33,12 +42,23 @@ def get_song(song_id):
 @songs.route('/', methods=['GET'])
 def get_songs():
     songs_list = []
+
     for song in Song.query.all():
+
+        song_file_path_base64 = song.Song_Filepath
+        bytes_song = bytes.fromhex(song_file_path_base64.replace('\\x', ''))
+        song_file_path = base64.b64decode(bytes_song)
+
+        with open(song_file_path, "rb") as mp3_file:
+            binary_song = mp3_file.read()
+            song_base64 = base64.b64encode(binary_song)
+            song_base64_str = song_base64.decode('utf-8')
+
         songs_list.append({
             'SongID': song.SongID,
             'Title': song.Title,
             'Upload_Date': song.Upload_Date,
-            'Song_Filepath': song.Song_Filepath,
+            'Song': song_base64_str,
             'Description': song.Description,
             'ArtistID': song.ArtistID,
             'AlbumID': song.AlbumID
@@ -84,7 +104,7 @@ def create_song():
         song_data = {
             'Title': new_song.Title,
             'Upload_Date': new_song.Upload_Date,
-            'Song_Filepath': new_song.Song_Filepath,
+            'Song_base64': song_base64,
             'Description': new_song.Description,
             'ArtistID': new_song.ArtistID,
             'AlbumID': new_song.AlbumID
