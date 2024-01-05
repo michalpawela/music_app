@@ -1,5 +1,4 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
 from extensions import db
 from .GenreModel import Genre
 

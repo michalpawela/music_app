@@ -1,7 +1,7 @@
-from flask import jsonify, Blueprint, request, send_file
+from flask import jsonify, Blueprint, request
 from Models.ArtistModel import Artist
 from extensions import db
-import base64
+
 
 artists = Blueprint("artists", __name__)
 

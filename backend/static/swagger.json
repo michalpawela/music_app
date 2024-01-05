@@ -409,7 +409,53 @@
           }
         }
       }
-    }
+    },
+    "/songs": {
+      "post": {
+      "summary": "Create a new song",
+        "description": "Create a new song in the database and stores it on disk with backend.",
+      "produces": ["application/json"],
+      "tags": ["songs"],
+      "parameters": [
+        {
+          "name": "body",
+          "in": "body",
+          "description": "JSON data for creating a new song",
+          "required": false,
+          "schema": {
+          "$ref": "#/definitions/CreateSongData"
+        }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "Successful creation of a song",
+          "schema": {
+            "$ref": "#/definitions/Song"
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/json": {
+              "example": {
+                "error": "File has not been provided"
+              }
+            }
+          }
+        },
+        "404": {
+          "description": "IntegrityError: Artist or Album not found",
+          "content": {
+            "application/json": {
+              "example": {
+                "error": "IntegrityError: Artist or Album not found"
+              }
+            }
+          }
+        }
+      }
+      }}
   },
   "definitions": {
     "CreateAlbumData": {
@@ -553,7 +599,39 @@
       "type": "integer"
     }
   }
-}
+},
+    "CreateSongData": {
+      "type": "object",
+      "properties": {
+                  "Title": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "ArtistID": {
+                    "type": "integer"
+                  },
+                  "AlbumID": {
+                    "type": "integer"
+                  },
+                  "Song":{
+                    "type": "string"
+                  }
+                }
+            },
+    "Song": {
+      "type": "object",
+      "properties": {
+        "SongID": {"type": "integer"},
+        "Title": {"type": "string"},
+        "Upload_Date": {"type": "string"},
+        "Song_Filepath": {"type": "string"},
+        "Description": {"type": "string"},
+        "ArtistID": {"type": "integer"},
+        "AlbumID": {"type": "integer"}
+      }
+    }
   }
 }
 
