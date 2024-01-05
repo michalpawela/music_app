@@ -2,9 +2,13 @@ import { useSelector } from "react-redux";
 
 import { Error, Loader, ArtistCard } from "../components";
 import { useGetTopChartsQuery } from "../redux/services/shazamCore";
+import useGetAllGenres from "../hooks/genre/useGetAllGenres";
 
 const TopArtists = () => {
   const { data, isFetching, error } = useGetTopChartsQuery();
+    const {genresV2, loading} = useGetAllGenres();
+
+    console.log(genresV2)
 
   if (isFetching) return <Loader title="Loading top artists" />;
 

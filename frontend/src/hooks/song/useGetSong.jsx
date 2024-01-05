@@ -1,14 +1,14 @@
 import {useEffect, useState} from "react";
 
-const useGetAllSongs = () => {
-    const [songs, setSongs] = useState([]);
+const useGetSong = (id) => {
+    const [song, setSong] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchSongs = async () => {
             try{
-                const response = await fetch('http://127.0.0.1:5000/songs/',{
+                const response = await fetch(`http://127.0.0.1:5000/songs/${id}`,{
                     method: 'GET',
                     headers:
                         {
@@ -21,7 +21,7 @@ const useGetAllSongs = () => {
                 }
 
                 const data = await response.json();
-                setSongs(data);
+                setSong(data);
             }catch (e){
                 setError(e);
             }finally {
@@ -32,7 +32,7 @@ const useGetAllSongs = () => {
         fetchSongs();
 
     }, []);
-    return {songs, loading, error};
+    return {song, loading, error};
 }
 
-export default useGetAllSongs;
+export default useGetSong;
