@@ -473,7 +473,8 @@
       }
       }
     },
-    "/songs/{song_id}": {"get": {
+    "/songs/{song_id}": {
+      "get": {
         "tags": ["songs"],
         "summary": "Get song by ID.",
         "description": "Retrieve song details by providing a SongID.",
@@ -497,7 +498,75 @@
             "description": "Song not found."
           }
         }
-      }}
+      },
+      "put": {
+        "tags": [
+          "songs"
+        ],
+        "summary": "Update an existing song by ID.",
+        "description": "Update an existing song in the database by providing a SongID.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "song_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "SongID of the desired song."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for updating an existing song",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSongData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Song updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Song"
+            }
+          },
+          "404": {
+            "description": "Song not found."
+          }
+        }
+      },
+      "delete": {
+        "tags": ["songs"],
+        "summary": "Delete song by ID.",
+        "description": "Delete song by providing an SongID.",
+        "parameters": [
+          {
+            "name": "song_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "SongID of the undesired song."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Song data.",
+            "schema": {
+              "$ref": "#/definitions/Song"
+            }
+          },
+          "404": {
+            "description": "Song not found."
+          }
+        }
+      }
+    }
   },
   "definitions": {
     "CreateAlbumData": {
@@ -643,6 +712,26 @@
   }
 },
     "CreateSongData": {
+      "type": "object",
+      "properties": {
+                  "Title": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "ArtistID": {
+                    "type": "integer"
+                  },
+                  "AlbumID": {
+                    "type": "integer"
+                  },
+                  "Song":{
+                    "type": "string"
+                  }
+                }
+            },
+    "UpdateSongData": {
       "type": "object",
       "properties": {
                   "Title": {

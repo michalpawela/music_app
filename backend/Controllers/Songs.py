@@ -82,11 +82,10 @@ def create_song():
     with open(song_file_path, "wb") as mp3_file:
         mp3_file.write(song_data)
 
+    song_file_path_base64 = base64.b64encode(song_file_path.encode("utf-8"))
 
     today = date.today()
     upload_date = today.strftime("%d-%m-%Y")
-
-    song_file_path_base64 = base64.b64encode(song_file_path.encode("utf-8"))
 
     new_song = Song(
         Title=title,
@@ -120,10 +119,10 @@ def update_song(song_id):
     data = request.json
     title = data.get('Title')
     upload_date = data.get('Upload_Date')
-    song_filepath = data.get('Song_Filepath')
     description = data.get('Description')
     artist_id = data.get('ArtistID')
     album_id = data.get('AlbumID')
+    song_base64 = data.get('Song')
 
     try:
         existing_song = Song.query.filter_by(SongID=song_id).one()
@@ -131,8 +130,15 @@ def update_song(song_id):
             existing_song.Title = title
         if upload_date:
             existing_song.Upload_Date = upload_date
-        if song_filepath:
-            existing_song.Song_Filepath = song_filepath
+        if song_base64:
+            song_file_path = os.path.join(songs_directory, title + '.mp3')
+
+            song_data = base64.b64decode(song_base64)
+            with open(song_file_path, "wb") as mp3_file:
+                mp3_file.write(song_data)
+
+            song_file_path_base64 = base64.b64encode(song_file_path.encode("utf-8"))
+            existing_song.Song_Filepath = song_file_path_base64
         if description:
             existing_song.Description = description
         if artist_id:
