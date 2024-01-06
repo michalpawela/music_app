@@ -15,8 +15,7 @@ class User(db.Model):
 
     # Foreign keys
 
-    def __init__(self, UserID, Name, Surname, Username, Password, Email, Registration_Date):
-        self.UserID = UserID
+    def __init__(self, Name, Surname, Username, Password, Email, Registration_Date):
         self.Name = Name
         self.Surname = Surname
         self.Username = Username

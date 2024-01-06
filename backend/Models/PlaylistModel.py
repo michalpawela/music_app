@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Date, ForeignKey, DATE
 from sqlalchemy.orm import relationship
 from extensions import db
-from UserModel import User
+from .UserModel import User
 
 class Playlist(db.Model):
     __tablename__ = "playlists"
@@ -12,7 +12,6 @@ class Playlist(db.Model):
     # Foreign keys
     UserID = Column("UserID", ForeignKey(User.UserID))
 
-    def __init__(self, PlaylistID, Name, UserID, SongID):
-        self.PlaylistID = PlaylistID
+    def __init__(self, Name, UserID):
         self.Name = Name
         self.UserID = UserID

@@ -4,6 +4,8 @@ from Controllers.Albums import albums
 from Controllers.Genres import genres
 from Controllers.Artists import artists
 from Controllers.Songs import songs
+from Controllers.Playlists import playlists
+from Controllers.Users import users
 from extensions import db
 from flask_swagger_ui import get_swaggerui_blueprint
 
@@ -29,6 +31,8 @@ app.register_blueprint(albums, url_prefix="/albums")
 app.register_blueprint(genres, url_prefix="/genres")
 app.register_blueprint(artists, url_prefix="/artists")
 app.register_blueprint(songs, url_prefix="/songs")
+app.register_blueprint(playlists, url_prefix="/playlists")
+app.register_blueprint(users, url_prefix="/users")
 # Initialize the database with the Flask app
 
 db.init_app(app)

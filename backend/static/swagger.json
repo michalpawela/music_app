@@ -566,6 +566,276 @@
           }
         }
       }
+    },
+    "/playlists": {
+      "post": {
+        "tags": ["playlists"],
+        "summary": "Create a new playlist.",
+        "description": "Create a new playlist in the database.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for creating a new playlist",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreatePlaylistData"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Playlist created successfully.",
+            "schema": {
+              "$ref": "#/definitions/Playlist"
+            }
+          },
+          "400": {
+            "description": "Invalid request data."
+          }
+        }
+      },
+      "get": {
+        "tags": ["playlists"],
+        "summary": "Get all playlists.",
+        "description": "Retrieve details of all playlists in the database.",
+        "responses": {
+          "200": {
+            "description": "List of playlists.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Playlist"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/playlists/{playlist_id}": {
+      "put": {
+        "tags": ["playlists"],
+        "summary": "Update an existing playlist by ID.",
+        "description": "Update an existing playlist in the database by providing a PlaylistID.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "playlist_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "PlaylistID of the desired playlist."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for updating an existing playlist",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdatePlaylistData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Playlist updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Playlist"
+            }
+          },
+          "404": {
+            "description": "Playlist not found."
+          }
+        }
+      },
+      "get": {
+        "tags": ["playlists"],
+        "summary": "Get playlist by ID.",
+        "description": "Retrieve playlist details by providing a PlaylistID.",
+        "parameters": [
+          {
+            "name": "playlist_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "PlaylistID of the desired playlist."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Playlist data.",
+            "schema": {
+              "$ref": "#/definitions/Playlist"
+            }
+          },
+          "404": {
+            "description": "Playlist not found."
+          }
+        }
+      },
+      "delete": {
+        "tags": ["playlists"],
+        "summary": "Delete playlist by ID.",
+        "description": "Delete playlist by providing an PlaylistID.",
+        "parameters": [
+          {
+            "name": "playlist_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "PlaylistID of the undesired playlist."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Playlist data.",
+            "schema": {
+              "$ref": "#/definitions/Playlist"
+            }
+          },
+          "404": {
+            "description": "Playlist not found."
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Create a new user.",
+        "description": "Create a new user in the database.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for creating a new user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUserData"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User created successfully.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid request data."
+          }
+        }
+      },
+      "get": {
+        "tags": ["users"],
+        "summary": "Get all users.",
+        "description": "Retrieve details of all users in the database.",
+        "responses": {
+          "200": {
+            "description": "List of users.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "put": {
+        "tags": ["users"],
+        "summary": "Update an existing user by ID.",
+        "description": "Update an existing user in the database by providing a UserID.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "UserID of the desired user."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for updating an existing user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUserData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "404": {
+            "description": "User not found."
+          }
+        }
+      },
+      "get": {
+        "tags": ["users"],
+        "summary": "Get user by ID.",
+        "description": "Retrieve user details by providing a UserID.",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "UserID of the desired user."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User data.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "404": {
+            "description": "User not found."
+          }
+        }
+      },
+      "delete": {
+        "tags": ["users"],
+        "summary": "Delete user by ID.",
+        "description": "Delete user by providing an UserID.",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "UserID of the undesired user."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User data.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "404": {
+            "description": "User not found."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -762,7 +1032,113 @@
         "ArtistID": {"type": "integer"},
         "AlbumID": {"type": "integer"}
       }
-    }
+    },
+    "CreatePlaylistData": {
+        "type": "object",
+        "properties": {
+        "Name": {
+        "type": "string"
+        },
+        "UserID": {
+          "type": "integer"
+        }
+        }
+        },
+    "UpdatePlaylistData": {
+        "type": "object",
+        "properties": {
+        "Name": {
+        "type": "string"
+        },
+        "UserID": {
+          "type": "integer"
+        }
+        }
+        },
+    "Playlist": {
+        "type": "object",
+        "properties": {
+        "PlaylistID": {
+        "type": "integer"
+        },
+        "Name": {
+        "type": "string"
+        },
+        "UserID": {
+          "type": "integer"
+        }}},
+    "CreateUserData": {
+        "type": "object",
+        "properties": {
+        "UserID": {
+        "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+          "Surname": {
+          "type": "string"
+        },
+          "Username": {
+          "type": "string"
+        },
+          "Password": {
+          "type": "string"
+        },
+          "Email": {
+          "type": "string"
+        }
+        }
+        },
+    "UpdateUserData": {
+        "type": "object",
+        "properties": {
+        "UserID": {
+        "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+          "Surname": {
+          "type": "string"
+        },
+          "Username": {
+          "type": "string"
+        },
+          "Password": {
+          "type": "string"
+        },
+          "Email": {
+          "type": "string"
+        }
+        }
+        },
+    "User": {
+        "type": "object",
+        "properties": {
+        "UserID": {
+        "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+          "Surname": {
+          "type": "string"
+        },
+          "Username": {
+          "type": "string"
+        },
+          "Password": {
+          "type": "string"
+        },
+          "Email": {
+          "type": "string"
+        },
+         "Registration_Date": {
+          "type": "string"
+        }
+        }
+        }
   }
 }
 
