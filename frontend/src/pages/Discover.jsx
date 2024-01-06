@@ -19,7 +19,7 @@ const Discover = () => {
   const genreTitle = genres.find(({ value }) => value === genreListId)?.title;
 
   const {genresV2, loading,error} = useGetAllGenres();
-  console.log(genresV2)
+
 
   if (loading) return <Loader title="Loading songs..." />;
 
@@ -34,7 +34,7 @@ const Discover = () => {
         <select
           onChange={(e) => dispatch(selectGenreListId(e.target.value))}
           value={genreListId || "pop"}
-          className="bg-blac text-gray-300 p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5"
+          className="min-w-[150px] bg-[#520038] text-gray-300 p-3 text-base rounded-lg outline-none sm:mt-0 mt-5 focus:ring-0 border-transparent focus:border-transparent"
         >
           {genres.map((genre) => (
             <option key={genre.value} value={genre.value}>

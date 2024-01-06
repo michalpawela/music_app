@@ -1,34 +1,32 @@
 import {useEffect, useState} from "react";
+import axios from "axios";
 
-const useGetSong = ({song}) => {
+const useAddSong = ({song}) => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    console.log(song)
+
     useEffect(() => {
         const addSongs = async () => {
             try{
-                setLoading(true);
-
-                const response = await fetch(`http://127.0.0.1:5000/songs/`,{
-                    method: 'POST',
-                    headers:
-                        {
-                            "Content-type": "application/json",
-                        },
-                    body: JSON.stringify(song)
+                const response = await axios.post('http://127.0.0.1:5000/songs/', song, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    }
                 });
 
-                if (!response.ok){
+                if (!response.data || response.status !== 201) {
                     throw new Error('Failed to add a new song');
                 }
 
-            }catch (e){
-                setError(e);
-            }finally {
-                setLoading(false)
-            }
-        };
+            } catch (e) {
+                console.error(e);
+            } finally {
+                console.log('Finally block');
+            }}
 
         if(song){
             addSongs();
@@ -39,4 +37,4 @@ const useGetSong = ({song}) => {
     return {loading, error};
 }
 
-export default useGetSong;
+export default useAddSong;
