@@ -22,11 +22,11 @@ const TopCharts = () => {
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
         {songs?.map((song, i) => (
           <SongCardAPI
-            key={song.key}
-            song={song.Song}
+            key={song.SongID}
+            song={song}
             isPlaying={isPlaying}
             activeSong={activeSong}
-            data={data}
+            data={songs}
             i={i}
           />
         ))}

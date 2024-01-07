@@ -22,7 +22,7 @@ const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate
 
   return (
     <audio
-      src={activeSong?.hub?.actions[1]?.uri}
+      src={`data:audio/mp3;base64,${activeSong?.Song}`}
       ref={ref}
       loop={repeat}
       onEnded={onEnded}
