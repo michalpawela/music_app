@@ -8,6 +8,7 @@ import { playPause, setActiveSong } from "../redux/features/playerSlice";
 import { useGetTopChartsQuery } from "../redux/services/shazamCore";
 import "swiper/css";
 import "swiper/css/free-mode";
+import useGetAllArtists from "../hooks/artist/useGetAllArtists";
 
 const TopChartCard = ({
   song,
@@ -50,6 +51,7 @@ const TopPlay = () => {
   const dispatch = useDispatch();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data } = useGetTopChartsQuery();
+  const {artists, loading} = useGetAllArtists()
   const divRef = useRef(null);
 
   const topPlays = data?.slice(0, 5);
@@ -112,19 +114,18 @@ const TopPlay = () => {
           modules={[FreeMode]}
           className="mt-4"
         >
-          {topPlays?.map((song, i) => (
+          {artists?.map((artist, i) => (
             <SwiperSlide
-              key={song.key}
+              key={artist.ArtistID}
               style={{ width: "25%", height: "auto" }}
               className="shadow-lg rounded-full animate-slideright"
             >
-              <Link to={`/artists/${song?.artists[0].adamid}`}>
                 <img
-                  src={song?.images.background}
+                  src={`data:image/jpeg;base64, ${artist.Photo}`}
                   alt="name"
                   className="rounded-full w-full object-cover"
                 />
-              </Link>
+
             </SwiperSlide>
           ))}
         </Swiper>

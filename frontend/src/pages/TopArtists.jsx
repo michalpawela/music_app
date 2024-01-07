@@ -3,29 +3,32 @@ import { useSelector } from "react-redux";
 import { Error, Loader, ArtistCard } from "../components";
 import { useGetTopChartsQuery } from "../redux/services/shazamCore";
 import useGetAllGenres from "../hooks/genre/useGetAllGenres";
+import useGetAllArtists from "../hooks/artist/useGetAllArtists";
+import ArtistCardAPI from "./TopArtistsAPI";
 
 const TopArtists = () => {
   const { data, isFetching, error } = useGetTopChartsQuery();
-    const {genresV2, loading} = useGetAllGenres();
+  const {artists, loading} = useGetAllArtists()
 
-    console.log(genresV2)
 
   if (isFetching) return <Loader title="Loading top artists" />;
 
   if (error) return <Error />;
 
   return (
-    <div className="flex flex-col">
-      <h2 className="font-bold text-3xl text-white text-left mt-4 mb-10">
-        Top Artists
-      </h2>
+    <>
+        <div className="flex flex-col">
+            <h2 className="font-bold text-3xl text-white text-left mt-4 mb-10">
+                Top Artists
+            </h2>
 
-      <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-        {data?.map((track, i) => (
-          <ArtistCard key={track.key} track={track} />
-        ))}
-      </div>
-    </div>
+
+            <div className="flex flex-wrap sm:justify-start justify-center gap-8">
+                {artists?.map((artist, i) => (
+                    <ArtistCardAPI key={artist.ArtistID} artist={artist} />
+                ))}
+            </div>
+        </div></>
   );
 };
 

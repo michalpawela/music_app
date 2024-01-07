@@ -1,4 +1,6 @@
 import {useEffect, useState} from "react";
+import axios from "axios";
+import {Error} from "../../components";
 
 const useGetArtist = (id) => {
     const [artist, setArtist] = useState(null);
@@ -8,19 +10,18 @@ const useGetArtist = (id) => {
     useEffect(() => {
         const fetchArtist = async () => {
             try{
-                const response = await fetch(`http://127.0.0.1:5000/artists/${id}`,{
-                    method: 'GET',
-                    headers:
-                        {
-                            "Content-type": "application/json",
-                        },
+                const response =  await axios.get(`http://127.0.0.1:5000/artists/${id}`,{
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    }
                 });
 
-                if (!response.ok){
-                    throw new Error('Failed to fetch genres');
+                if (response.status !== 200) {
+                    throw new Error('Failed to fetch artist');
                 }
 
-                const data = await response.json();
+                const data =  response.data;
                 setArtist(data);
             }catch (e){
                 setError(e);

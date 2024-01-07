@@ -21,7 +21,7 @@ const Login = () => {
             if(result.payload){
                 setEmail('');
                 setPassword('');
-                navigate('/')
+                navigate('/discover')
             }
         });
     }

@@ -2,9 +2,25 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import PlayPause from "./PlayPause";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
+import {useEffect, useState} from "react";
 
-const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
+const SongCardAPI = ({ song, isPlaying, activeSong, data, i }) => {
   const dispatch = useDispatch();
+  const [audio, setAudio] = useState(new Audio());
+
+  useEffect(() => {
+    if (song.Song) {
+      audio.src = `data:audio/mp3;base64,${song.Song}`;
+      audio.load();
+    }
+
+    return () => {
+      // Cleanup when component is unmounted
+      audio.pause();
+      audio.src = "";
+      audio.load();
+    };
+  }, [audio, song]);
 
   const handlePauseClick = () => {
     dispatch(playPause(false));
@@ -21,7 +37,7 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
       <div className="relative w-full h-56 group">
         <div
           className={`absolute inset-0 justify-center items-center bg-black bg-opacity-50 group-hover:flex ${
-            activeSong?.title === song.title
+            activeSong?.Title === song.Title
               ? "flex bg-black bg-opacity-70"
               : "hidden"
           }`}
@@ -34,26 +50,31 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
             handlePlay={handlePlayClick}
           />
         </div>
-        <img alt="song_img" src={song.images?.coverart} />
+        <div className="w-48 h-48 bg-white text-black">
+          song photo
+          {/*<img alt="song_img" src={`data:image/jpeg;base64, ${song.Photo}`} />*/}
+        </div>
+
       </div>
       <div className="mt-4 flex flex-col">
         <p className="font-semibold text-lg text-white truncate">
           <Link to={`/songs/${song?.key}`}>{song.title}</Link>
         </p>
         <p className="text-sm truncate text-gray-300 mt-1">
-          <Link
+          {/*<Link
             to={
               song.artists
                 ? `/artists/${song?.artists[0]?.adamid}`
                 : "/top-artists"
             }
-          >
-            {song.subtitle}
-          </Link>
+
+            {song.Description}
+          </Link> >*/}
+          {song.Description}
         </p>
       </div>
     </div>
   );
 };
 
-export default SongCard;
+export default SongCardAPI;
