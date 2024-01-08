@@ -7,11 +7,17 @@
   "paths": {
     "/albums": {
       "post": {
-        "tags": ["albums"],
+        "tags": [
+          "albums"
+        ],
         "summary": "Create a new album.",
         "description": "Create a new album in the database.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -36,7 +42,9 @@
         }
       },
       "get": {
-        "tags": ["albums"],
+        "tags": [
+          "albums"
+        ],
         "summary": "Get all albums.",
         "description": "Retrieve details of all albums in the database.",
         "responses": {
@@ -54,11 +62,17 @@
     },
     "/albums/{album_id}": {
       "put": {
-        "tags": ["albums"],
+        "tags": [
+          "albums"
+        ],
         "summary": "Update an existing album by ID.",
         "description": "Update an existing album in the database by providing an AlbumID.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "album_id",
@@ -90,7 +104,9 @@
         }
       },
       "get": {
-        "tags": ["albums"],
+        "tags": [
+          "albums"
+        ],
         "summary": "Get album by ID.",
         "description": "Retrieve album details by providing an AlbumID.",
         "parameters": [
@@ -115,7 +131,9 @@
         }
       },
       "delete": {
-        "tags": ["albums"],
+        "tags": [
+          "albums"
+        ],
         "summary": "Delete album by ID.",
         "description": "Delete album by providing an AlbumID.",
         "parameters": [
@@ -142,11 +160,17 @@
     },
     "/genres": {
       "post": {
-        "tags": ["genres"],
+        "tags": [
+          "genres"
+        ],
         "summary": "Create a new genre.",
         "description": "Create a new genre in the database.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -171,7 +195,9 @@
         }
       },
       "get": {
-        "tags": ["genres"],
+        "tags": [
+          "genres"
+        ],
         "summary": "Get all genres.",
         "description": "Retrieve details of all genres in the database.",
         "responses": {
@@ -189,11 +215,17 @@
     },
     "/genres/{genre_id}": {
       "put": {
-        "tags": ["genres"],
+        "tags": [
+          "genres"
+        ],
         "summary": "Update an existing genre by ID.",
         "description": "Update an existing genre in the database by providing a GenreID.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "genre_id",
@@ -225,7 +257,9 @@
         }
       },
       "get": {
-        "tags": ["genres"],
+        "tags": [
+          "genres"
+        ],
         "summary": "Get genre by ID.",
         "description": "Retrieve genre details by providing a GenreID.",
         "parameters": [
@@ -250,7 +284,9 @@
         }
       },
       "delete": {
-        "tags": ["genres"],
+        "tags": [
+          "genres"
+        ],
         "summary": "Delete genre by ID.",
         "description": "Delete genre by providing an GenreID.",
         "parameters": [
@@ -276,116 +312,134 @@
       }
     },
     "/artists": {
-  "post": {
-    "tags": ["artists"],
-    "summary": "Create a new artist.",
-    "description": "Create a new artist in the database.",
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
-    "parameters": [
-      {
-        "name": "body",
-        "in": "body",
-        "description": "JSON data for creating a new artist",
-        "required": true,
-        "schema": {
-          "$ref": "#/definitions/CreateArtistData"
-        }
-      }
-    ],
-    "responses": {
-      "201": {
-        "description": "Artist created successfully.",
-        "schema": {
-          "$ref": "#/definitions/Artist"
+      "post": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "Create a new artist.",
+        "description": "Create a new artist in the database.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for creating a new artist",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateArtistData"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Artist created successfully.",
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            }
+          },
+          "400": {
+            "description": "Invalid request data."
+          }
         }
       },
-      "400": {
-        "description": "Invalid request data."
-      }
-    }
-  },
-  "get": {
-    "tags": ["artists"],
-    "summary": "Get all artists.",
-    "description": "Retrieve details of all artists in the database.",
-    "responses": {
-      "200": {
-        "description": "List of artists.",
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Artist"
+      "get": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "Get all artists.",
+        "description": "Retrieve details of all artists in the database.",
+        "responses": {
+          "200": {
+            "description": "List of artists.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Artist"
+              }
+            }
           }
         }
       }
-    }
-  }
-},
+    },
     "/artists/{artist_id}": {
-  "put": {
-    "tags": ["artists"],
-    "summary": "Update an existing artist by ID.",
-    "description": "Update an existing artist in the database by providing an ArtistID.",
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
-    "parameters": [
-      {
-        "name": "artist_id",
-        "in": "path",
-        "type": "integer",
-        "required": true,
-        "description": "ArtistID of the desired artist."
-      },
-      {
-        "name": "body",
-        "in": "body",
-        "description": "JSON data for updating an existing artist",
-        "required": true,
-        "schema": {
-          "$ref": "#/definitions/UpdateArtistData"
-        }
-      }
-    ],
-    "responses": {
-      "200": {
-        "description": "Artist updated successfully.",
-        "schema": {
-          "$ref": "#/definitions/Artist"
-        }
-      },
-      "404": {
-        "description": "Artist not found."
-      }
-    }
-  },
-  "get": {
-    "tags": ["artists"],
-    "summary": "Get artist by ID.",
-    "description": "Retrieve artist details by providing an ArtistID.",
-    "parameters": [
-      {
-        "name": "artist_id",
-        "in": "path",
-        "type": "integer",
-        "required": true,
-        "description": "ArtistID of the desired artist."
-      }
-    ],
-    "responses": {
-      "200": {
-        "description": "Artist data.",
-        "schema": {
-          "$ref": "#/definitions/Artist"
+      "put": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "Update an existing artist by ID.",
+        "description": "Update an existing artist in the database by providing an ArtistID.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "artist_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "ArtistID of the desired artist."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for updating an existing artist",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateArtistData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artist updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            }
+          },
+          "404": {
+            "description": "Artist not found."
+          }
         }
       },
-      "404": {
-        "description": "Artist not found."
-      }
-    }
-  },
+      "get": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "Get artist by ID.",
+        "description": "Retrieve artist details by providing an ArtistID.",
+        "parameters": [
+          {
+            "name": "artist_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "ArtistID of the desired artist."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artist data.",
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            }
+          },
+          "404": {
+            "description": "Artist not found."
+          }
+        }
+      },
       "delete": {
-        "tags": ["artists"],
+        "tags": [
+          "artists"
+        ],
         "summary": "Delete artist by ID.",
         "description": "Delete artist by providing an ArtistID.",
         "parameters": [
@@ -412,70 +466,78 @@
     },
     "/songs": {
       "post": {
-      "summary": "Create a new song",
+        "summary": "Create a new song",
         "description": "Create a new song in the database and stores it on disk with backend.",
-      "produces": ["application/json"],
-      "tags": ["songs"],
-      "parameters": [
-        {
-          "name": "body",
-          "in": "body",
-          "description": "JSON data for creating a new song",
-          "required": false,
-          "schema": {
-          "$ref": "#/definitions/CreateSongData"
-        }
-        }
-      ],
-      "responses": {
-        "201": {
-          "description": "Successful creation of a song",
-          "schema": {
-            "$ref": "#/definitions/Song"
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "songs"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for creating a new song",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateSongData"
+            }
           }
-        },
-        "400": {
-          "description": "Bad Request",
-          "content": {
-            "application/json": {
-              "example": {
-                "error": "File has not been provided"
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful creation of a song",
+            "schema": {
+              "$ref": "#/definitions/Song"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "File has not been provided"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "IntegrityError: Artist or Album not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "IntegrityError: Artist or Album not found"
+                }
               }
             }
           }
-        },
-        "404": {
-          "description": "IntegrityError: Artist or Album not found",
-          "content": {
-            "application/json": {
-              "example": {
-                "error": "IntegrityError: Artist or Album not found"
-              }
-            }
-          }
         }
-      }
       },
       "get": {
         "summary": "Get all songs",
         "description": "Retrieve details of all songs in the database.",
-      "tags": ["songs"],
-      "responses": {
-        "200": {
-          "description": "List of songs",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Song"
+        "tags": [
+          "songs"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of songs",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Song"
+              }
             }
           }
         }
       }
-      }
     },
     "/songs/{song_id}": {
       "get": {
-        "tags": ["songs"],
+        "tags": [
+          "songs"
+        ],
         "summary": "Get song by ID.",
         "description": "Retrieve song details by providing a SongID.",
         "parameters": [
@@ -542,7 +604,9 @@
         }
       },
       "delete": {
-        "tags": ["songs"],
+        "tags": [
+          "songs"
+        ],
         "summary": "Delete song by ID.",
         "description": "Delete song by providing an SongID.",
         "parameters": [
@@ -569,11 +633,17 @@
     },
     "/playlists": {
       "post": {
-        "tags": ["playlists"],
+        "tags": [
+          "playlists"
+        ],
         "summary": "Create a new playlist.",
         "description": "Create a new playlist in the database.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -598,7 +668,9 @@
         }
       },
       "get": {
-        "tags": ["playlists"],
+        "tags": [
+          "playlists"
+        ],
         "summary": "Get all playlists.",
         "description": "Retrieve details of all playlists in the database.",
         "responses": {
@@ -616,11 +688,17 @@
     },
     "/playlists/{playlist_id}": {
       "put": {
-        "tags": ["playlists"],
+        "tags": [
+          "playlists"
+        ],
         "summary": "Update an existing playlist by ID.",
         "description": "Update an existing playlist in the database by providing a PlaylistID.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "playlist_id",
@@ -652,7 +730,9 @@
         }
       },
       "get": {
-        "tags": ["playlists"],
+        "tags": [
+          "playlists"
+        ],
         "summary": "Get playlist by ID.",
         "description": "Retrieve playlist details by providing a PlaylistID.",
         "parameters": [
@@ -677,7 +757,9 @@
         }
       },
       "delete": {
-        "tags": ["playlists"],
+        "tags": [
+          "playlists"
+        ],
         "summary": "Delete playlist by ID.",
         "description": "Delete playlist by providing an PlaylistID.",
         "parameters": [
@@ -702,517 +784,677 @@
         }
       }
     },
-    "/users": {
+    "/playlists/add_song": {
       "post": {
-        "tags": ["users"],
-        "summary": "Create a new user.",
-        "description": "Create a new user in the database.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "tags": [
+          "playlists"
+        ],
+        "summary": "Add Song to Playlist",
+        "description": "Add a song to a playlist",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "description": "JSON data for creating a new user",
+            "description": "JSON data for creating a new playlist",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateUserData"
+              "$ref": "#/definitions/SongPlayListAssociation"
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "User created successfully.",
+          "200": {
+            "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/User"
+              "type": "object",
+              "properties": {
+                "playlist": {
+                  "$ref": "#/definitions/SongPlayListAssociation"
+                }
+              }
             }
-          },
-          "400": {
-            "description": "Invalid request data."
           }
         }
-      },
-      "get": {
-        "tags": ["users"],
-        "summary": "Get all users.",
-        "description": "Retrieve details of all users in the database.",
+      }
+    },
+    "/playlists/remove_song": {
+      "delete": {
+        "tags": [
+          "playlists"
+        ],
+        "summary": "Remove Song from Playlist",
+        "description": "Remove a song from a playlist",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "JSON data for creating a new playlist",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SongPlayListAssociation"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "List of users.",
+            "description": "Successful operation",
             "schema": {
-              "type": "array",
-              "items": {
+              "type": "object",
+              "properties": {
+                "playlist": {
+                  "$ref": "#/definitions/SongPlayListAssociation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+        "post": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Create a new user.",
+          "description": "Create a new user in the database.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "JSON data for creating a new user",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/CreateUserData"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User created successfully.",
+              "schema": {
                 "$ref": "#/definitions/User"
               }
+            },
+            "400": {
+              "description": "Invalid request data."
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Get all users.",
+          "description": "Retrieve details of all users in the database.",
+          "responses": {
+            "200": {
+              "description": "List of users.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/User"
+                }
+              }
             }
           }
         }
-      }
-    },
+      },
     "/users/{user_id}": {
-      "put": {
-        "tags": ["users"],
-        "summary": "Update an existing user by ID.",
-        "description": "Update an existing user in the database by providing a UserID.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "user_id",
-            "in": "path",
-            "type": "integer",
-            "required": true,
-            "description": "UserID of the desired user."
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "JSON data for updating an existing user",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateUserData"
+        "put": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Update an existing user by ID.",
+          "description": "Update an existing user in the database by providing a UserID.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "user_id",
+              "in": "path",
+              "type": "integer",
+              "required": true,
+              "description": "UserID of the desired user."
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "description": "JSON data for updating an existing user",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UpdateUserData"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User updated successfully.",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "404": {
+              "description": "User not found."
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "User updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/User"
+        },
+        "get": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Get user by ID.",
+          "description": "Retrieve user details by providing a UserID.",
+          "parameters": [
+            {
+              "name": "user_id",
+              "in": "path",
+              "type": "integer",
+              "required": true,
+              "description": "UserID of the desired user."
             }
-          },
-          "404": {
-            "description": "User not found."
+          ],
+          "responses": {
+            "200": {
+              "description": "User data.",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "404": {
+              "description": "User not found."
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Delete user by ID.",
+          "description": "Delete user by providing an UserID.",
+          "parameters": [
+            {
+              "name": "user_id",
+              "in": "path",
+              "type": "integer",
+              "required": true,
+              "description": "UserID of the undesired user."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User data.",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "404": {
+              "description": "User not found."
+            }
           }
         }
       },
-      "get": {
-        "tags": ["users"],
-        "summary": "Get user by ID.",
-        "description": "Retrieve user details by providing a UserID.",
-        "parameters": [
-          {
-            "name": "user_id",
-            "in": "path",
-            "type": "integer",
-            "required": true,
-            "description": "UserID of the desired user."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User data.",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          "404": {
-            "description": "User not found."
-          }
-        }
-      },
-      "delete": {
-        "tags": ["users"],
-        "summary": "Delete user by ID.",
-        "description": "Delete user by providing an UserID.",
-        "parameters": [
-          {
-            "name": "user_id",
-            "in": "path",
-            "type": "integer",
-            "required": true,
-            "description": "UserID of the undesired user."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User data.",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          "404": {
-            "description": "User not found."
-          }
-        }
-      }
-    },
     "/login": {
-      "post": {
-        "summary": "User login",
-        "tags": ["auth"],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Credentials for user login",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Username": {
-                  "type": "string"
-                },
-                "Password": {
-                  "type": "string"
+        "post": {
+          "summary": "User login",
+          "tags": [
+            "auth"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Credentials for user login",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Username": {
+                    "type": "string"
+                  },
+                  "Password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Session created successfully",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "string"
+                  }
                 }
               }
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Session created successfully",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "token": {
-                  "type": "string"
+        }
+      },
+    "/logout": {
+        "delete": {
+          "summary": "User logout",
+          "tags": [
+            "auth"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "Authorization",
+              "description": "JWT token",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Session deleted successfully",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
                 }
               }
-            }
-          },
-          "404": {
-            "description": "User not found",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string"
+            },
+            "401": {
+              "description": "Invalid token or user has no session",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
                 }
               }
             }
           }
         }
       }
-    },
-    "/logout": {
-      "delete": {
-        "summary": "User logout",
-        "tags": ["auth"],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "description": "JWT token",
-            "required": true,
+  },
+    "definitions": {
+      "CreateAlbumData": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string"
+          },
+          "Publishing_Date": {
+            "type": "string"
+          },
+          "Cover": {
+            "type": "string"
+          },
+          "ArtistID": {
+            "type": "integer"
+          },
+          "GenreID": {
+            "type": "integer"
+          }
+        }
+      },
+      "UpdateAlbumData": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string"
+          },
+          "Publishing_Date": {
+            "type": "string"
+          },
+          "Cover": {
+            "type": "string"
+          },
+          "ArtistID": {
+            "type": "integer"
+          },
+          "GenreID": {
+            "type": "integer"
+          }
+        }
+      },
+      "Album": {
+        "type": "object",
+        "properties": {
+          "AlbumID": {
+            "type": "integer"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "Publishing_Date": {
+            "type": "string"
+          },
+          "Cover": {
+            "type": "string"
+          },
+          "ArtistID": {
+            "type": "integer"
+          },
+          "GenreID": {
+            "type": "integer"
+          }
+        }
+      },
+      "CreateGenreData": {
+        "type": "object",
+        "properties": {
+          "Name": {
             "type": "string"
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Session deleted successfully",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
+        }
+      },
+      "UpdateGenreData": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          }
+        }
+      },
+      "Genre": {
+        "type": "object",
+        "properties": {
+          "GenreID": {
+            "type": "integer"
           },
-          "401": {
-            "description": "Invalid token or user has no session",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
+          "Name": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateArtistData": {
+        "type": "object",
+        "properties": {
+          "Full_Name": {
+            "type": "string"
+          },
+          "Country": {
+            "type": "string"
+          },
+          "Photo": {
+            "type": "string"
+          },
+          "GenreID": {
+            "type": "integer"
+          }
+        }
+      },
+      "UpdateArtistData": {
+        "type": "object",
+        "properties": {
+          "Full_Name": {
+            "type": "string"
+          },
+          "Country": {
+            "type": "string"
+          },
+          "Photo": {
+            "type": "string"
+          },
+          "GenreID": {
+            "type": "integer"
+          }
+        }
+      },
+      "Artist": {
+        "type": "object",
+        "properties": {
+          "ArtistID": {
+            "type": "integer"
+          },
+          "Full_Name": {
+            "type": "string"
+          },
+          "Country": {
+            "type": "string"
+          },
+          "Photo": {
+            "type": "string"
+          },
+          "GenreID": {
+            "type": "integer"
+          }
+        }
+      },
+      "CreateSongData": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "Artist": {
+            "type": "integer"
+          },
+          "Album": {
+            "type": "integer"
+          },
+          "Song": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateSongData": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "Artist": {
+            "type": "integer"
+          },
+          "Album": {
+            "type": "integer"
+          },
+          "Song": {
+            "type": "string"
+          }
+        }
+      },
+      "Song": {
+        "type": "object",
+        "properties": {
+          "SongID": {
+            "type": "integer"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "Upload_Date": {
+            "type": "string"
+          },
+          "Song_base64": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "ArtistID": {
+            "type": "integer"
+          },
+          "AlbumID": {
+            "type": "integer"
+          }
+        }
+      },
+      "CreatePlaylistData": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "UserID": {
+            "type": "integer"
+          }
+        }
+      },
+      "UpdatePlaylistData": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          }
+        }
+      },
+      "SongPlayListAssociation": {
+        "type": "object",
+        "properties": {
+          "PlaylistID": {
+            "type": "integer"
+          },
+          "SongID": {
+            "type": "integer"
+          }
+        }
+      },
+      "Playlist": {
+        "type": "object",
+        "properties": {
+          "PlaylistID": {
+                      "type": "integer"
+                    },
+                    "Name":{
+                      "type": "string"
+                    },
+                    "UserID": {
+                      "type": "integer"
+                    },
+                    "Songs": {
+                      "type": "object",
+                      "properties": {
+                        "SongID": {
+                          "type": "integer"
+                        },
+                        "Title": {
+                          "type": "string"
+                        },
+                        "Upload_Date": {
+                          "type": "string"
+                        },
+                        "Description": {
+                          "type": "string"
+                        },
+                        "ArtistID": {
+                          "type": "integer"
+                        },
+                        "AlbumID": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+
+        }
+      },
+      "CreateUserData": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Surname": {
+            "type": "string"
+          },
+          "Username": {
+            "type": "string"
+          },
+          "Email": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateUserData": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Surname": {
+            "type": "string"
+          },
+          "Username": {
+            "type": "string"
+          },
+          "Email": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "UserID": {
+            "type": "integer"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Surname": {
+            "type": "string"
+          },
+          "Username": {
+            "type": "string"
+          },
+          "Email": {
+            "type": "string"
+          },
+          "Registration_Date": {
+            "type": "string"
           }
         }
       }
     }
-  },
-  "definitions": {
-    "CreateAlbumData": {
-      "type": "object",
-      "properties": {
-        "Title": {
-          "type": "string"
-        },
-        "Publishing_Date": {
-          "type": "string"
-        },
-        "Cover": {
-          "type": "string"
-        },
-        "ArtistID": {
-          "type": "integer"
-        },
-        "GenreID": {
-          "type": "integer"
-        }
-      }
-    },
-    "UpdateAlbumData": {
-      "type": "object",
-      "properties": {
-        "Title": {
-          "type": "string"
-        },
-        "Publishing_Date": {
-          "type": "string"
-        },
-        "Cover": {
-          "type": "string"
-        },
-        "ArtistID": {
-          "type": "integer"
-        },
-        "GenreID": {
-          "type": "integer"
-        }
-      }
-    },
-    "Album": {
-      "type": "object",
-      "properties": {
-        "AlbumID": {
-          "type": "integer"
-        },
-        "Title": {
-          "type": "string"
-        },
-        "Publishing_Date": {
-          "type": "string"
-        },
-        "Cover": {
-          "type": "string"
-        },
-        "ArtistID": {
-          "type": "integer"
-        },
-        "GenreID": {
-          "type": "integer"
-        }
-        }
-        },
-    "CreateGenreData": {
-        "type": "object",
-        "properties": {
-        "Name": {
-        "type": "string"
-        }
-        }
-        },
-    "UpdateGenreData": {
-        "type": "object",
-        "properties": {
-        "Name": {
-        "type": "string"
-        }
-        }
-        },
-    "Genre": {
-        "type": "object",
-        "properties": {
-        "GenreID": {
-        "type": "integer"
-        },
-        "Name": {
-        "type": "string"
-        }}},
-    "CreateArtistData": {
-  "type": "object",
-  "properties": {
-    "Full_Name": {
-      "type": "string"
-    },
-    "Country": {
-      "type": "string"
-    },
-    "Photo": {
-      "type": "string"
-    },
-    "GenreID": {
-      "type": "integer"
-    }
   }
-},
-    "UpdateArtistData": {
-  "type": "object",
-  "properties": {
-    "Full_Name": {
-      "type": "string"
-    },
-    "Country": {
-      "type": "string"
-    },
-    "Photo": {
-      "type": "string"
-    },
-    "GenreID": {
-      "type": "integer"
-    }
-  }
-},
-    "Artist": {
-  "type": "object",
-  "properties": {
-    "ArtistID": {
-      "type": "integer"
-    },
-    "Full_Name": {
-      "type": "string"
-    },
-    "Country": {
-      "type": "string"
-    },
-    "Photo": {
-      "type": "string"
-    },
-    "GenreID": {
-      "type": "integer"
-    }
-  }
-},
-    "CreateSongData": {
-      "type": "object",
-      "properties": {
-                  "Title": {
-                    "type": "string"
-                  },
-                  "Description": {
-                    "type": "string"
-                  },
-                  "Artist": {
-                    "type": "integer"
-                  },
-                  "Album": {
-                    "type": "integer"
-                  },
-                  "Song":{
-                    "type": "string"
-                  }
-                }
-            },
-    "UpdateSongData": {
-      "type": "object",
-      "properties": {
-                  "Title": {
-                    "type": "string"
-                  },
-                  "Description": {
-                    "type": "string"
-                  },
-                  "Artist": {
-                    "type": "integer"
-                  },
-                  "Album": {
-                    "type": "integer"
-                  },
-                  "Song":{
-                    "type": "string"
-                  }
-                }
-            },
-    "Song": {
-      "type": "object",
-      "properties": {
-        "SongID": {"type": "integer"},
-        "Title": {"type": "string"},
-        "Upload_Date": {"type": "string"},
-        "Song_base64": {"type": "string"},
-        "Description": {"type": "string"},
-        "ArtistID": {"type": "integer"},
-        "AlbumID": {"type": "integer"}
-      }
-    },
-    "CreatePlaylistData": {
-        "type": "object",
-        "properties": {
-        "Name": {
-        "type": "string"
-        },
-        "UserID": {
-          "type": "integer"
-        }
-        }
-        },
-    "UpdatePlaylistData": {
-        "type": "object",
-        "properties": {
-        "Name": {
-        "type": "string"
-        }
-        }
-        },
-    "Playlist": {
-        "type": "object",
-        "properties": {
-        "PlaylistID": {
-        "type": "integer"
-        },
-        "Name": {
-        "type": "string"
-        },
-        "UserID": {
-          "type": "integer"
-        }}},
-    "CreateUserData": {
-        "type": "object",
-        "properties": {
-        "Name": {
-          "type": "string"
-        },
-          "Surname": {
-          "type": "string"
-        },
-          "Username": {
-          "type": "string"
-        },
-          "Email": {
-          "type": "string"
-        }
-        }
-        },
-    "UpdateUserData": {
-        "type": "object",
-        "properties": {
-        "Name": {
-          "type": "string"
-        },
-          "Surname": {
-          "type": "string"
-        },
-          "Username": {
-          "type": "string"
-        },
-          "Email": {
-          "type": "string"
-        }
-        }
-        },
-    "User": {
-        "type": "object",
-        "properties": {
-        "UserID": {
-        "type": "integer"
-        },
-        "Name": {
-          "type": "string"
-        },
-          "Surname": {
-          "type": "string"
-        },
-          "Username": {
-          "type": "string"
-        },
-          "Email": {
-          "type": "string"
-        },
-         "Registration_Date": {
-          "type": "string"
-        }
-        }
-        }
-  }
-}
-

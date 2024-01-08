@@ -1,7 +1,9 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 from extensions import db
 from .ArtistModel import Artist
 from .AlbumModel import Album
+from .SongPlaylistAssociation import songPlaylistAssociation
 
 
 class Song(db.Model):
@@ -23,3 +25,5 @@ class Song(db.Model):
         self.Description = Description
         self.ArtistID = ArtistID
         self.AlbumID = AlbumID
+
+    playlists = relationship('Playlist', secondary=songPlaylistAssociation, back_populates='songs')

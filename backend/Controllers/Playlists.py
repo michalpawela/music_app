@@ -1,5 +1,6 @@
 from flask import jsonify, Blueprint, request
 from Models.PlaylistModel import Playlist
+from Models.SongModel import Song
 from extensions import db
 
 playlists = Blueprint("playlists", __name__)
@@ -63,10 +64,24 @@ def create_playlist():
 def get_playlist(playlist_id):
     playlist = Playlist.query.get(playlist_id)
     if playlist:
+        songs_data = []
+        for song in playlist.songs:
+            song_data = {
+                'SongID': song.SongID,
+                'Title': song.Title,
+                'Upload_Date': song.Upload_Date,
+                'Description': song.Description,
+                'ArtistID': song.ArtistID,
+                'AlbumID': song.AlbumID
+            }
+            songs_data.append(song_data)
+
         playlist_data = {
             'PlaylistID': playlist.PlaylistID,
             'Name': playlist.Name,
-            'UserID': playlist.UserID
+            'UserID': playlist.UserID,
+            'Songs': songs_data
+
         }
         return jsonify({'playlist': playlist_data})
     else:
@@ -78,9 +93,51 @@ def get_playlists():
     playlists = Playlist.query.all()
     playlists_list = []
     for playlist in playlists:
+        songs_data = []
+        for song in playlist.songs:
+            song_data = {
+                'SongID': song.SongID,
+                'Title': song.Title,
+                'Upload_Date': song.Upload_Date,
+                'Description': song.Description,
+                'ArtistID': song.ArtistID,
+                'AlbumID': song.AlbumID
+            }
+            songs_data.append(song_data)
+
         playlists_list.append({
             'PlaylistID': playlist.PlaylistID,
             'Name': playlist.Name,
-            'UserID': playlist.UserID
+            'UserID': playlist.UserID,
+            'Songs': songs_data
         })
     return jsonify({'playlists': playlists_list})
+
+
+@playlists.route('/add_song', methods=["POST"])
+def add_song():
+    data = request.json
+    playlist_id = data.get('PlaylistID')
+    song_id = data.get('SongID')
+    playlist = Playlist.query.get(playlist_id)
+    song = Song.query.get(song_id)
+
+    playlist.songs.append(song)
+    song.playlists.append(playlist)
+
+    db.session.commit()
+    return jsonify({'playlist':{'playlist_id': playlist_id, 'song_id': song_id}}), 200
+
+
+@playlists.route('/remove_song', methods=["DELETE"])
+def remove_song():
+    data = request.json
+    playlist_id = data.get('PlaylistID')
+    song_id = data.get('SongID')
+    playlist = Playlist.query.get(playlist_id)
+    song = Song.query.get(song_id)
+
+    playlist.songs.remove(song)
+
+    db.session.commit()
+    return jsonify({'playlist': {'playlist_id': playlist_id, 'song_id': song_id}}), 200
