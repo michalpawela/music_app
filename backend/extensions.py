@@ -1,7 +1,6 @@
-import os.path
 
+import os.path
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -14,3 +13,4 @@ session = Session()
 data_directory = 'C:\\dataMusicApp'
 songs_directory = os.path.join(data_directory, 'songs')
 allowed_extensions = {'mp3'}
+

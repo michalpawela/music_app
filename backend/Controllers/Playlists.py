@@ -9,22 +9,18 @@ playlists = Blueprint("playlists", __name__)
 def update_playlist(playlist_id):
     data = request.json
     name = data.get('Name')
-    userId = data.get('UserID')
 
     existing_playlist = Playlist.query.get(playlist_id)
 
     if existing_playlist:
         if name:
             existing_playlist.Name = name
-        if userId:
-            existing_playlist.UserID = userId
 
         db.session.commit()
 
         playlist_data = {
             'PlaylistID': existing_playlist.PlaylistID,
             'Name': existing_playlist.Name,
-            'UserID': existing_playlist.UserID
         }
 
         return jsonify({'playlist': playlist_data}), 200

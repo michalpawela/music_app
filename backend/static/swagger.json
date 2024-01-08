@@ -836,6 +836,98 @@
           }
         }
       }
+    },
+    "/login": {
+      "post": {
+        "summary": "User login",
+        "tags": ["auth"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Credentials for user login",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Username": {
+                  "type": "string"
+                },
+                "Password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Session created successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logout": {
+      "delete": {
+        "summary": "User logout",
+        "tags": ["auth"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "JWT token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Session deleted successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid token or user has no session",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1049,9 +1141,6 @@
         "properties": {
         "Name": {
         "type": "string"
-        },
-        "UserID": {
-          "type": "integer"
         }
         }
         },
@@ -1070,9 +1159,6 @@
     "CreateUserData": {
         "type": "object",
         "properties": {
-        "UserID": {
-        "type": "integer"
-        },
         "Name": {
           "type": "string"
         },
@@ -1093,9 +1179,6 @@
     "UpdateUserData": {
         "type": "object",
         "properties": {
-        "UserID": {
-        "type": "integer"
-        },
         "Name": {
           "type": "string"
         },

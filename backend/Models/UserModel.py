@@ -1,5 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey, DATE
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String
 from extensions import db
 
 class User(db.Model):
