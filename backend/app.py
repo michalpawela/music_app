@@ -8,6 +8,7 @@ from Controllers.Users import users, auth
 from flask_swagger_ui import get_swaggerui_blueprint
 from extensions import db
 from flask_session import Session
+from flask_bcrypt import Bcrypt
 
 
 sess = Session()
@@ -29,6 +30,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = 300
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 sess.init_app(app)
+bcrypt = Bcrypt(app)
 
 
 # Configure the database URI

@@ -1,3 +1,4 @@
+import base64
 from datetime import date, datetime
 from functools import wraps
 from flask import jsonify, Blueprint, request, current_app
@@ -11,6 +12,7 @@ users = Blueprint("users", __name__)
 
 @users.route('/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
+    from app import bcrypt
     data = request.json
     name = data.get('Name')
     surname = data.get('Surname')
@@ -28,7 +30,7 @@ def update_user(user_id):
         if username:
             existing_user.Username = username
         if password:
-            existing_user.Password = password
+            existing_user.Password = bcrypt.generate_password_hash(password).decode('utf-8')
         if email:
             existing_user.Email = email
 
@@ -61,6 +63,7 @@ def delete_user(user_id):
 
 @users.route('/', methods=['POST'])
 def create_user():
+    from app import bcrypt
     data = request.json
     name = data.get('Name')
     surname = data.get('Surname')
@@ -71,7 +74,7 @@ def create_user():
     today = date.today()
     registration_date = today.strftime("%d-%m-%Y")
 
-    new_user = User(Name=name, Surname=surname, Username=username, Password=password, Email=email, Registration_Date=registration_date)
+    new_user = User(Name=name, Surname=surname, Username=username, Password=bcrypt.generate_password_hash(password).decode('utf-8'), Email=email, Registration_Date=registration_date)
 
     db.session.add(new_user)
     db.session.commit()
@@ -144,15 +147,17 @@ def login_required(func):
 
 
 def valid_email_and_password(username, password):
+    from app import bcrypt
     users = User.query.all()
     for user in users:
-        if username == user.Username and password == user.Password:
+        if username == user.Username and bcrypt.check_password_hash(user.Password, password):
             return True
     return False
 
 
 @auth.route("/login", methods=["POST"])
 def login():
+    from app import bcrypt
     data = request.json
     username = data.get('Username')
     password = data.get('Password')
