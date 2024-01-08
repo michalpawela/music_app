@@ -1082,10 +1082,10 @@
                   "Description": {
                     "type": "string"
                   },
-                  "ArtistID": {
+                  "Artist": {
                     "type": "integer"
                   },
-                  "AlbumID": {
+                  "Album": {
                     "type": "integer"
                   },
                   "Song":{
@@ -1102,10 +1102,10 @@
                   "Description": {
                     "type": "string"
                   },
-                  "ArtistID": {
+                  "Artist": {
                     "type": "integer"
                   },
-                  "AlbumID": {
+                  "Album": {
                     "type": "integer"
                   },
                   "Song":{

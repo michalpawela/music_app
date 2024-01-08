@@ -4,6 +4,8 @@ from datetime import date
 
 from flask import jsonify, Blueprint, request
 from Models.SongModel import Song
+from Models.ArtistModel import Artist
+from Models.AlbumModel import Album
 from extensions import db
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import IntegrityError
@@ -25,14 +27,33 @@ def get_song(song_id):
             song_base64 = base64.b64encode(binary_song)
             song_base64_str = song_base64.decode('utf-8')
 
+        album = Album.query.filter_by(AlbumID=song.AlbumID).one()
+        album_data = {
+            'AlbumID': album.AlbumID,
+            'Title': album.Title,
+            'Publishing_Date': str(album.Publishing_Date),
+            'Cover': album.Cover,
+            'ArtistID': album.ArtistID,
+            'GenreID': album.GenreID
+        }
+
+        artist = Artist.query.filter_by(ArtistID=song.ArtistID).one()
+        artist_data = {
+            'ArtistID': artist.ArtistID,
+            'Full_Name': artist.Full_Name,
+            'Country': artist.Country,
+            'Photo': artist.Photo,
+            'GenreID': artist.GenreID
+        }
+
         songs_data = {
             'SongID': song.SongID,
             'Title': song.Title,
             'Upload_Date': song.Upload_Date,
             'Song': song_base64_str,
             'Description': song.Description,
-            'ArtistID': song.ArtistID,
-            'AlbumID': song.AlbumID
+            'Artist': artist_data,
+            'Album': album_data
         }
         return jsonify({'songs': songs_data})
     except NoResultFound:
@@ -54,14 +75,33 @@ def get_songs():
             song_base64 = base64.b64encode(binary_song)
             song_base64_str = song_base64.decode('utf-8')
 
+        album = Album.query.filter_by(AlbumID=song.AlbumID).one()
+        album_data = {
+            'AlbumID': album.AlbumID,
+            'Title': album.Title,
+            'Publishing_Date': str(album.Publishing_Date),
+            'Cover': album.Cover,
+            'ArtistID': album.ArtistID,
+            'GenreID': album.GenreID
+        }
+        artist = Artist.query.filter_by(ArtistID=song.ArtistID).one()
+        artist_data = {
+            'ArtistID': artist.ArtistID,
+            'Full_Name': artist.Full_Name,
+            'Country': artist.Country,
+            'Photo': artist.Photo,
+            'GenreID': artist.GenreID
+        }
+
+
         songs_list.append({
             'SongID': song.SongID,
             'Title': song.Title,
             'Upload_Date': song.Upload_Date,
             'Song': song_base64_str,
             'Description': song.Description,
-            'ArtistID': song.ArtistID,
-            'AlbumID': song.AlbumID
+            'Artist': artist_data,
+            'Album': album_data
         })
     return jsonify({'songs': songs_list})
 
