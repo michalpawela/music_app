@@ -4,7 +4,8 @@ from Controllers.Genres import genres
 from Controllers.Artists import artists
 from Controllers.Songs import songs
 from Controllers.Playlists import playlists
-from Controllers.Users import users, auth
+from Controllers.Users import users
+from Controllers.Auth import auth
 from flask_swagger_ui import get_swaggerui_blueprint
 from extensions import db
 from flask_session import Session

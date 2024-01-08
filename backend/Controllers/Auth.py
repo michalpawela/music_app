@@ -1,86 +1,76 @@
+from datetime import datetime
 from functools import wraps
-import jwt
-from flask import request, abort, Blueprint
-from flask import current_app
+from flask import jsonify, Blueprint, request, current_app
 from Models.UserModel import User
+from flask import session
+import jwt
 
 auth = Blueprint("auth", __name__)
 
 
-def token_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        token = None
-        if "Authorization" in request.headers:
-            token = request.headers["Authorization"].split(" ")[1]
+def login_required(func):
+    @wraps(func)
+    def decorator(*args, **kwargs):
+        token = request.headers.get("Authorization")
         if not token:
-            return {
-                "message": "Authentication Token is missing!",
-                "data": None,
-                "error": "Unauthorized"
-            }, 401
+            return jsonify({'message': "A valid token is missing!"}), 401
         try:
-            data = jwt.decode(token, current_app.config["SECRET_KEY"], algorithms=["HS256"])
-            current_user = User().get_by_id(data["user_id"])
-            if current_user is None:
-                return {
-                "message": "Invalid Authentication token!",
-                "data": None,
-                "error": "Unauthorized"
-            }, 401
-        except Exception as e:
-            return {
-                "message": "Something went wrong",
-                "data": None,
-                "error": str(e)
-            }, 500
+            data = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
+            username = data['Username']
+            if username not in session:
+                return jsonify({'message': "This user has no session!"}), 401
+        except:
+            return jsonify({"message": "Invalid token!"}), 401
+        return func(*args, **kwargs)
+    return decorator
 
-        return f(current_user, *args, **kwargs)
 
-    return decorated
+def valid_email_and_password(username, password):
+    from app import bcrypt
+    users = User.query.all()
+    for user in users:
+        if username == user.Username and bcrypt.check_password_hash(user.Password, password):
+            return True
+    return False
 
 
 @auth.route("/login", methods=["POST"])
 def login():
+    from app import bcrypt
+    data = request.json
+    username = data.get('Username')
+    password = data.get('Password')
+    if not valid_email_and_password(username, password):
+        return jsonify({'error': 'User not found'}), 404
+
+    if username in session:
+        session.pop(username)
+
+    timestamp = datetime.now().timestamp()
+
+    token = jwt.encode(
+        {"Username": username, "time": timestamp},
+        current_app.config["SECRET_KEY"],
+        algorithm="HS256")
+
+    session[username] = token
+
+    return jsonify({"JWT": token}), 200
+
+
+@auth.route("/logout", methods=["DELETE"])
+@login_required
+def logout():
+    token = request.headers.get("Authorization")
+
     try:
-        data = request.json
-        username = data.get('Username')
-        password = data.get('Password')
+        data = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
+        username = data['Username']
+        if username in session:
+            session.pop(username)
+        else:
+            return jsonify({'message': "This user has no session!"}), 401
+    except:
+        return jsonify({"message": "Invalid token!"}), 401
 
-
-        is_validated = validate_email_and_password(data.get('email'), data.get('password'))
-        if is_validated is not True:
-            return dict(message='Invalid data', data=None, error=is_validated), 400
-        user = User().login(
-            data["email"],
-            data["password"]
-        )
-        if user:
-            try:
-                # token should expire after 24 hrs
-                user["token"] = jwt.encode(
-                    {"user_id": user["_id"]},
-                    current_app.config["SECRET_KEY"],
-                    algorithm="HS256"
-                )
-                return {
-                    "message": "Successfully fetched auth token",
-                    "data": user
-                }
-            except Exception as e:
-                return {
-                    "error": "Something went wrong",
-                    "message": str(e)
-                }, 500
-        return {
-            "message": "Error fetching auth token!, invalid email or password",
-            "data": None,
-            "error": "Unauthorized"
-        }, 404
-    except Exception as e:
-        return {
-                "message": "Something went wrong!",
-                "error": str(e),
-                "data": None
-        }, 500
-
+    return jsonify({'message': 'Session deleted successfully'}), 200

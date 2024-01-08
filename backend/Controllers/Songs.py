@@ -1,7 +1,6 @@
 import base64
 import os
 from datetime import date
-
 from flask import jsonify, Blueprint, request
 from Models.SongModel import Song
 from Models.ArtistModel import Artist
