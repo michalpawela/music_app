@@ -1168,9 +1168,6 @@
           "Username": {
           "type": "string"
         },
-          "Password": {
-          "type": "string"
-        },
           "Email": {
           "type": "string"
         }
@@ -1186,9 +1183,6 @@
           "type": "string"
         },
           "Username": {
-          "type": "string"
-        },
-          "Password": {
           "type": "string"
         },
           "Email": {
@@ -1209,9 +1203,6 @@
           "type": "string"
         },
           "Username": {
-          "type": "string"
-        },
-          "Password": {
           "type": "string"
         },
           "Email": {

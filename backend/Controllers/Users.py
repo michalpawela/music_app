@@ -40,7 +40,6 @@ def update_user(user_id):
             'Name': existing_user.Name,
             'Surname': existing_user.Surname,
             'Username': existing_user.Username,
-            'Password': existing_user.Password,
             'Email': existing_user.Email
         }
 
@@ -83,7 +82,6 @@ def create_user():
         'Name': new_user.Name,
         'Surname': new_user.Surname,
         'Username': new_user.Username,
-        'Password': new_user.Password,
         'Email': new_user.Email,
         'Registration_date': new_user.Registration_Date
     }
@@ -100,7 +98,6 @@ def get_user(user_id):
             'Name': user.Name,
             'Surname': user.Surname,
             'Username': user.Username,
-            'Password': user.Password,
             'Email': user.Email,
             'Registration_date': user.Registration_Date
         }
@@ -119,7 +116,6 @@ def get_users():
             'Name': user.Name,
             'Surname': user.Surname,
             'Username': user.Username,
-            'Password': user.Password,
             'Email': user.Email,
             'Registration_date': user.Registration_Date
         })
