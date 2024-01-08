@@ -59,6 +59,45 @@ def get_song(song_id):
         return jsonify({'error': 'Song not found'}), 404
 
 
+@songs.route('/artist/<int:artist_id>', methods=['GET'])
+def get_songs_for_artist(artist_id):
+    songs_list = []
+
+    for song in Song.query.all():
+        if song.ArtistID == artist_id:
+            album = Album.query.filter_by(AlbumID=song.AlbumID).one()
+            album_data = {
+                'AlbumID': album.AlbumID,
+                'Title': album.Title,
+                'Publishing_Date': str(album.Publishing_Date),
+                'Cover': album.Cover,
+                'ArtistID': album.ArtistID,
+                'GenreID': album.GenreID
+            }
+
+            song_file_path_base64 = song.Song_Filepath
+            bytes_song = bytes.fromhex(song_file_path_base64.replace('\\x', ''))
+            song_file_path = base64.b64decode(bytes_song)
+
+            with open(song_file_path, "rb") as mp3_file:
+                binary_song = mp3_file.read()
+                song_base64 = base64.b64encode(binary_song)
+                song_base64_str = song_base64.decode('utf-8')
+
+            songs_data = {
+                'SongID': song.SongID,
+                'Title': song.Title,
+                'Upload_Date': song.Upload_Date,
+                'Song': song_base64_str,
+                'Description': song.Description,
+                'Artist': artist_id,
+                'Album': album_data
+            }
+            songs_list.append(songs_data)
+
+    return jsonify({'songs': songs_list}), 200
+
+
 @songs.route('/', methods=['GET'])
 def get_songs():
     songs_list = []
