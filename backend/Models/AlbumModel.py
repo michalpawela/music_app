@@ -1,5 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey, DATE
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, ForeignKey
 from extensions import db
 from .ArtistModel import Artist
 from .GenreModel import Genre

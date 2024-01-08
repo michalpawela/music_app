@@ -1,5 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey, DATE
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String
 from extensions import db
 
 class User(db.Model):
@@ -15,8 +14,7 @@ class User(db.Model):
 
     # Foreign keys
 
-    def __init__(self, UserID, Name, Surname, Username, Password, Email, Registration_Date):
-        self.UserID = UserID
+    def __init__(self, Name, Surname, Username, Password, Email, Registration_Date):
         self.Name = Name
         self.Surname = Surname
         self.Username = Username
