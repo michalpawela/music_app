@@ -660,6 +660,35 @@
         }
       }
     },
+    "/songs/genre/{genre_id}": {
+      "get": {
+        "tags": [
+          "songs"
+        ],
+        "summary": "Get songs by GenreID.",
+        "description": "Retrieve songs details by providing a GenreID.",
+        "parameters": [
+          {
+            "name": "genre_id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "GenreID of the desired song."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Song data.",
+            "schema": {
+              "$ref": "#/definitions/SongsOfGenre"
+            }
+          },
+          "404": {
+            "description": "Song not found."
+          }
+        }
+      }
+    },
     "/playlists": {
       "post": {
         "tags": [
@@ -1409,6 +1438,70 @@
             }
           }
       },
+      "SongsOfGenre": {"type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "SongID": {
+                "type": "integer"
+              },
+              "Title": {
+                "type": "string"
+              },
+              "Upload_Date": {
+                "type": "string"
+              },
+              "Song_base64": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "Artist": {
+                "type": "object",
+                "properties": {
+                  "ArtistID": {
+                    "type": "integer"
+                  },
+                  "Full name": {
+                    "type": "string"
+                  },
+                  "Country": {
+                    "type": "string"
+                  },
+                  "Photo": {
+                    "type": "string"
+                  },
+                  "GenreID": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "Album": {
+                "type": "object",
+                "properties": {
+                  "AlbumID": {
+                    "type": "integer"
+                  },
+                  "Title": {
+                    "type": "string"
+                  },
+                  "Publishing_Date": {
+                    "type": "string"
+                  },
+                  "Cover": {
+                    "type": "string"
+                  },
+                  "ArtistID": {
+                    "type": "integer"
+                  },
+                  "GenreID": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }},
       "CreatePlaylistData": {
         "type": "object",
         "properties": {
