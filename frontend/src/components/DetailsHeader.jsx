@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
-const DetailsHeader = ({ artistId, artistData, songData }) => {
-  const artist = artistData?.artists[artistId]?.attributes;
+const DetailsHeader = ({ songData, artistData }) => {
+  const artist = songData?.Artist;
+    console.log(artistData)
 
   return (
     <div className="relative w-full flex flex-col">
@@ -10,28 +11,33 @@ const DetailsHeader = ({ artistId, artistData, songData }) => {
         <img
           alt="art"
           className="sm:w-48 w-28 sm:h-48 h-28 rounded-full object-cover border-2 shadow-xl shadow-black"
-          src={
-            artistId
-              ? artist.artwortk?.url.replace("{w}", "500").replace("{h}", "500")
-              : songData?.images?.coverart
-          }
+          src={`data:image/jpeg;base64, ${artist.Photo || (artistData && artistData.Album.Cover)}`}
         />
 
-        <div className="ml-5">
-          <p className="font-bold sm:text-3xl text-xl text-white">
-            {artistId ? artist.name : songData?.title}
-          </p>
-          {!artistId && (
+        <div className="ml-5 flex flex-col gap-4">
+            <p className="font-bold sm:text-3xl text-xl text-white">
+                {songData.Title}
+            </p>
+            <div>
+                <p className="font-semibold sm:text-smtext-sm text-white">
+                    {artist.Full_Name}
+                </p>
+                <p className="font-semibold sm:text-smtext-sm text-gray-400">
+                    {songData.Album.Title}
+                </p>
+            </div>
+
+          {/*{!artistId && (
             <Link to={`/artists/${songData?.artists[0].adamid}`}>
               <p className="text-base text-gray-400 mt-2">
                 {songData?.subtitle}
               </p>
             </Link>
-          )}
+          )}*/}
 
-          <p className="text-base text-gray-400 mt-1">
+          {/*<p className="text-base text-gray-400 mt-1">
             {artistId ? artist?.genreNames[0] : songData?.genres?.primary}
-          </p>
+          </p>*/}
         </div>
       </div>
 

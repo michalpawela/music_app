@@ -120,11 +120,13 @@ const TopPlay = () => {
               style={{ width: "25%", height: "auto" }}
               className="shadow-lg rounded-full animate-slideright"
             >
-                <img
-                  src={`data:image/jpeg;base64, ${artist.Photo}`}
-                  alt="name"
-                  className="rounded-full w-full object-cover"
-                />
+                <Link to={`/artists/${1}`}>
+                  <img
+                      src={`data:image/jpeg;base64, ${artist.Photo}`}
+                      alt="name"
+                      className="rounded-full w-full object-cover"
+                  />
+                </Link>
 
             </SwiperSlide>
           ))}

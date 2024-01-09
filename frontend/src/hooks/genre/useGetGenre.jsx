@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import axios from "axios";
 
 const useGetGenre = (id) => {
     const [genre, setGenre] = useState(null);
@@ -8,20 +9,20 @@ const useGetGenre = (id) => {
     useEffect(() => {
         const fetchGenre = async () => {
             try{
-                const response = await fetch(`http://127.0.0.1:5000/genres/${id}`,{
-                    method: 'GET',
-                    headers:
-                        {
-                            "Content-type": "application/json",
-                        },
+                const response = await axios.get(`http://127.0.0.1:5000/genres/${id}`,{
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    }
                 });
 
-                if (!response.ok){
+                if (response.status !== 200){
                     throw new Error('Failed to fetch genres');
                 }
 
-                const data = await response.json();
-                setGenre(data);
+                const data = response.data;
+                console.log(data)
+                setGenre(data.genre);
             }catch (e){
                 setError(e);
             }finally {

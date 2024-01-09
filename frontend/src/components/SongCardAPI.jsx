@@ -35,10 +35,7 @@ const SongCardAPI = ({ song, isPlaying, activeSong, data, i }) => {
             />
           </div>
 
-          <div className="w-48 h-48 bg-amber-200 rounded-md">
-            Song image
-          </div>
-          {/*<img alt="song_img" src={song.images?.coverart} />*/}
+          <img alt="song_img" src={`data:image/jpeg;base64, ${song.Album.Cover}`} />
         </div>
         <div className="mt-4 flex flex-col">
           <p className="font-semibold text-lg text-white truncate">
@@ -46,15 +43,13 @@ const SongCardAPI = ({ song, isPlaying, activeSong, data, i }) => {
           </p>
           <p className="text-sm truncate text-gray-300 mt-1">
             {song.Description}
-            {/*<Link
+            <Link
                 to={
-                  song.artists
-                      ? `/artists/${song?.artists[0]?.adamid}`
-                      : "/top-artists"
+                   `/artists/${song?.Artist.ArtistId}`
+
                 }
             >
-              {song.subtitle}
-            </Link>*/}
+            </Link>
           </p>
         </div>
       </div>
