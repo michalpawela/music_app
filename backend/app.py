@@ -10,7 +10,7 @@ from flask_swagger_ui import get_swaggerui_blueprint
 from extensions import db
 from flask_session import Session
 from flask_bcrypt import Bcrypt
-
+from flask_cors import CORS
 
 sess = Session()
 
@@ -26,6 +26,7 @@ swagger_ui_blueprint = get_swaggerui_blueprint(
 )
 
 app = Flask(__name__)
+CORS(app)
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = 300
