@@ -6,6 +6,7 @@ import { useGetArtistDetailsQuery } from "../redux/services/shazamCore";
 import useGetArtist from "../hooks/artist/useGetArtist";
 import useGetAllSongsByArtist from "../hooks/song/useGetAllSongsByArtist";
 import ArtistDetailsHeader from "../components/ArtistDetailsHeader";
+import {TopChartCard} from "../components/TopPlay";
 
 const ArtistDetails = () => {
   const { id: artistId } = useParams();
@@ -21,17 +22,25 @@ const ArtistDetails = () => {
   if (loading) return <Loader title="Loading top artists" />;
 
   if (error) return <Error />;
-  console.log(songs)
+
   return (
     <div className="flex flex-col">
       <ArtistDetailsHeader artistId={artistId} artistData={artist} />
 
-      <RelatedSongs
-        data={songs}
-        artistId={artistId}
-        isPlaying={isPlaying}
-        activeSong={activeSong}
-      />
+      <h1 className="font-bold text-3xl text-white">Author's songs</h1>
+        <div className="mt-4 flex flex-col gap-1">
+
+            {songs?.map((song, i) => (
+                <TopChartCard
+                    key={song.SongID}
+                    song={song}
+                    i={i}
+                    isPlaying={isPlaying}
+                    activeSong={activeSong}
+                    data={songs}
+                />
+            ))}
+        </div>
     </div>
   );
 };

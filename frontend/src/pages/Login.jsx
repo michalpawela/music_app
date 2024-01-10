@@ -3,6 +3,8 @@ import logo from '../assets/favicon.ico'
 import {useDispatch, useSelector} from "react-redux";
 import {loginUser} from "../redux/features/userSlice";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import {Error} from "../components";
 const Login = () => {
 
     const [email, setEmail] = useState('');
@@ -14,8 +16,8 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         let userCredentials = {
-            email,
-            password
+            Username: email,
+            Password: password,
         }
         dispatch(loginUser(userCredentials)).then((result) => {
             if(result.payload){
@@ -25,6 +27,44 @@ const Login = () => {
             }
         });
     }
+
+    /*const handleLogin2 = async (e) => {
+        e.preventDefault();
+
+        const requestData = {
+            Username: email,
+            Password: password,
+        };
+
+        try{
+            setLoading(true)
+            const response = await axios.post('http://127.0.0.1:5000/login/', requestData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                }
+            });
+
+            if (!response.data || response.status !== 201) {
+                throw new Error('Failed to add a new song');
+            }
+
+            setSuccess(true);
+
+            setTimeout(() => {
+                setSuccess(false);
+                navigate('/discover')
+
+            }, 2000);
+
+
+
+        } catch (e) {
+            setError(true)
+        } finally {
+            setLoading(false)
+        }
+    }*/
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -82,7 +122,7 @@ const Login = () => {
                             </button>
                             {
                                 error && (
-                                    <div>
+                                    <div className="text-white mt-2 font-semibold">
                                         {error}
                                     </div>
                                 )

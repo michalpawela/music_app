@@ -6,10 +6,10 @@ import useGetAllSongs from "../hooks/song/useGetAllSongs";
 import SongCardAPI from "../components/SongCardAPI";
 
 const TopCharts = () => {
-  const { data, isFetching, error } = useGetTopChartsQuery();
+
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  const {songs, loading} = useGetAllSongs()
-  if (isFetching) return <Loader title="Loading top charts" />;
+  const {songs, loading, error} = useGetAllSongs()
+  if (loading) return <Loader title="Loading Top charts" />;
     console.log(activeSong)
   if (error) return <Error />;
 

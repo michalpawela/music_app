@@ -3,7 +3,7 @@ import axios from "axios";
 import {Error} from "../../components";
 
 const useGetAllPlaylists = () => {
-    const [songs, setSongs] = useState([]);
+    const [playlists, setPlaylists] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -23,7 +23,7 @@ const useGetAllPlaylists = () => {
                 }
 
                 const data =  response.data;
-                setSongs(data.playlists);
+                setPlaylists(data.playlists);
             }catch (e){
                 setError(e);
             }finally {
@@ -34,7 +34,7 @@ const useGetAllPlaylists = () => {
         fetchPlaylists();
 
     }, []);
-    return {songs, loading, error};
+    return {playlists, loading, error};
 }
 
 export default useGetAllPlaylists;

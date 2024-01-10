@@ -22,7 +22,7 @@ const useGetAllGenres = () => {
                 }
 
                 const data =  response.data;
-                console.log(data.genres)
+
                 setGenresV2(data.genres);
             }catch (e){
                 setError(e);

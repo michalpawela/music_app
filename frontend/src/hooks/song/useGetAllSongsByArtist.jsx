@@ -23,6 +23,7 @@ const useGetAllSongsByArtist = (artistId) => {
                 }
 
                 const data =  response.data;
+                console.log(data)
 
                 setSongs(data.songs);
             }catch (e){

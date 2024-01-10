@@ -6,12 +6,20 @@ import axios from "axios";
 import SuccessNotification from "../components/SuccessNotification";
 import {Error, Loader} from "../components";
 import {useNavigate} from "react-router-dom";
+import useGetAllGenres from "../hooks/genre/useGetAllGenres";
+import useGetAllArtists from "../hooks/artist/useGetAllArtists";
+import useGetAllAlbums from "../hooks/album/useGetAllAlbums";
 
 const AddSong = () => {
+    const {genresV2} = useGetAllGenres()
+    const {artists} = useGetAllArtists()
+    const {albums} = useGetAllAlbums()
+    const [artistIdData, setArtistIdData] = useState(1);
+    const [albumIdData, setAlbumIdData] = useState(1)
     const [file, setFile] = useState(null);
     const [base64DB, setBase64DB] = useState('');
     const [songTitle, setSongTitle] = useState('');
-    const [category, setCategory] = useState('');
+    const [genreId, setGenreId] = useState(1);
     const [songDescription, setSongDescription] = useState('');
 
     const [loading, setLoading] = useState(false)
@@ -19,6 +27,8 @@ const AddSong = () => {
     const [error, setError] = useState(false)
 
     const navigate = useNavigate();
+
+
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -41,8 +51,8 @@ const AddSong = () => {
         const requestData = {
             Title: songTitle,
             Description: songDescription,
-            ArtistID: 1,
-            AlbumID: 1,
+            ArtistID: artistIdData,
+            AlbumID: albumIdData,
             Song: base64DB,
         };
 
@@ -99,7 +109,7 @@ const AddSong = () => {
                            </p>
 
                            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                               <div className="sm:col-span-4">
+                               <div className="col-span-full">
                                    <label htmlFor="song-title" className="block text-sm font-medium leading-6 text-white">
                                        Song title
                                    </label>
@@ -117,24 +127,72 @@ const AddSong = () => {
                                    </div>
                                </div>
 
-                               <div className="sm:col-span-3">
-                                   <label htmlFor="category" className="block text-sm font-medium leading-6 text-white">
-                                       Category
-                                   </label>
-                                   <div className="mt-2">
-                                       <select
-                                           id="category"
-                                           name="category"
-                                           required
-                                           onChange={(e) => setCategory(e.target.value)}
-                                           className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-0 sm:text-sm sm:leading-6 [&_*]:text-black"
-                                       >
-                                           <option>Pop</option>
-                                           <option>Rap</option>
-                                           <option>Country</option>
-                                       </select>
+                               <div className="flex flex-row gap-x-6 justify-between">
+                                   <div className="col-span-3">
+                                       <label htmlFor="category" className="block text-sm font-medium leading-6 text-white">
+                                           Category
+                                       </label>
+                                       <div className="mt-2">
+                                           {genresV2 && (
+                                               <select
+                                                   onChange={(e) => setGenreId(e.target.value)}
+                                                   value={genreId}
+                                                   className="min-w-[150px] bg-[#520038] text-gray-300 p-2 text-base rounded-lg outline-none sm:mt-0 mt-5 focus:ring-0 border-transparent focus:border-transparent"
+                                               >
+                                                   {genresV2.map((genre) => (
+                                                       <option key={genre.GenreID} value={genre.GenreID}>
+                                                           {genre.Name}
+                                                       </option>
+                                                   ))}
+                                               </select>
+                                           )}
+                                       </div>
+                                   </div>
+                                   <div className="col-span-3">
+                                       <label htmlFor="category" className="block text-sm font-medium leading-6 text-white">
+                                           Album
+                                       </label>
+                                       <div className="mt-2">
+                                           {albums && (
+                                               <select
+                                                   onChange={(e) => setAlbumIdData(e.target.value)}
+                                                   value={albumIdData}
+                                                   className="min-w-[150px] bg-[#520038] text-gray-300 p-2 text-base rounded-lg outline-none sm:mt-0 mt-5 focus:ring-0 border-transparent focus:border-transparent"
+                                               >
+                                                   {albums.map((album) => (
+                                                       <option key={album.AlbumID} value={album.AlbumID}>
+                                                           {album.Title}
+                                                       </option>
+                                                   ))}
+                                               </select>
+                                           )}
+                                       </div>
+                                   </div>
+                                   <div className="col-span-3">
+                                       <label htmlFor="category" className="block text-sm font-medium leading-6 text-white">
+                                           Artist
+                                       </label>
+                                       <div className="mt-2">
+                                           {artists && (
+                                               <select
+                                                   onChange={(e) => setArtistIdData(e.target.value)}
+                                                   value={artistIdData}
+                                                   className="min-w-[150px] bg-[#520038] text-gray-300 p-2 text-base rounded-lg outline-none sm:mt-0 mt-5 focus:ring-0 border-transparent focus:border-transparent"
+                                               >
+                                                   {artists.map((artist) => (
+                                                       <option key={artist.ArtistID} value={artist.ArtistID}>
+                                                           {artist.Full_Name}
+                                                       </option>
+                                                   ))}
+                                               </select>
+                                           )}
+                                       </div>
                                    </div>
                                </div>
+
+
+
+
 
                                <div className="col-span-full">
                                    <label htmlFor="description" className="block text-sm font-medium leading-6 text-white">

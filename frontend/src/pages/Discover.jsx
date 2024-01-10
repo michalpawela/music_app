@@ -30,7 +30,7 @@ const Discover = () => {
 
   const {genre} = useGetGenre(genreId)
 
-  console.log(songs)
+
   if (loading) return <Loader title="Loading songs..." />;
 
   if (error) return <Error />;
@@ -40,15 +40,16 @@ const Discover = () => {
     <div className="flex flex-col">
       <div className="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10">
         <h2 className="font-bold text-3xl text-white text-left">
-          Discover <span >{genre.Name}</span>
+          Discover <span key={genreId}>{genre.Name}</span>
         </h2>
+
         <select
           onChange={(e) => setGenreId(e.target.value)}
           value={genreId}
           className="min-w-[150px] bg-[#520038] text-gray-300 p-3 text-base rounded-lg outline-none sm:mt-0 mt-5 focus:ring-0 border-transparent focus:border-transparent"
         >
           {genresV2.map((genre) => (
-            <option key={genre.GenreID} value={genre.Name}>
+            <option key={genre.GenreID} value={genre.GenreID}>
               {genre.Name}
             </option>
           ))}

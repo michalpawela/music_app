@@ -13,6 +13,8 @@ import {
 } from "./pages";
 import Login from "./pages/Login";
 import AddSong from "./pages/AddSong";
+import Playlist from "./pages/Playlist";
+import PlaylistDetails from "./pages/PlaylistDetails";
 
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
@@ -30,8 +32,9 @@ const App = () => {
                 <Routes>
                   <Route path="/discover" element={<Discover />} />
                   <Route path="/top-artists" element={<TopArtists />} />
+                  <Route path="/playlists" element={<Playlist />} />
+                  <Route path="/playlists/:playlistid" element={<PlaylistDetails />} />
                   <Route path="/top-charts" element={<TopCharts />} />
-                  <Route path="/around-you" element={<AroundYou />} />
                   <Route path="/add-song" element={<AddSong />} />
                   <Route path="/artists/:id" element={<ArtistDetails />} />
                   <Route path="/songs/:songid" element={<SongDetails />} />

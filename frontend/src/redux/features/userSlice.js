@@ -3,8 +3,8 @@ import axios from "axios";
 export const loginUser = createAsyncThunk(
     'user/loginUser',
     async(userCredentials) =>{
-        const request = await axios.post(`http://localhost:5000/api/auth/login`, userCredentials);
-        const response = await request.data;
+        const request = await axios.post('http://127.0.0.1:5000/login/', userCredentials);
+        const response = request.data;
         localStorage.setItem('user', JSON.stringify(response));
         return response;
     }
