@@ -1,6 +1,7 @@
 from flask import jsonify, Blueprint, request
 from Models.AlbumModel import Album
 from extensions import db
+from Services import AlbumsServices
 
 albums = Blueprint("albums", __name__)
 
@@ -96,19 +97,12 @@ def create_album():
 
 @albums.route('/<int:album_id>', methods=['GET'])
 def get_album(album_id):
-    album = Album.query.get(album_id)
-    if album:
-        album_data = {
-            'AlbumID': album.AlbumID,
-            'Title': album.Title,
-            'Publishing_Date': str(album.Publishing_Date),
-            'Cover': album.Cover,
-            'ArtistID': album.ArtistID,
-            'GenreID': album.GenreID
-        }
-        return jsonify({'album': album_data})
-    else:
+    album = AlbumsServices.get_album(album_id)
+
+    if(album == None):
         return jsonify({'error': 'Album not found'}), 404
+
+    return jsonify({'album': album}), 200
 
 
 @albums.route('/', methods=['GET'])
