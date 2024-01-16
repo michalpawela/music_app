@@ -1,3 +1,4 @@
 ﻿backend/Models/__pycache__
 backend/Controllers/__pycache__
 backend/__pycache__
+backend/flask_session
