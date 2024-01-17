@@ -36,7 +36,7 @@ bcrypt = Bcrypt(app)
 
 
 # Configure the database URI
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Dupeczka1234@localhost/ppliowap'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Dupeczka1234@localhost/plliowap'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.register_blueprint(albums, url_prefix="/albums")
 app.register_blueprint(genres, url_prefix="/genres")

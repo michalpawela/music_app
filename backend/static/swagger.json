@@ -25,7 +25,7 @@
             "description": "JSON data for creating a new album",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateAlbumData"
+              "$ref": "#/definitions/AlbumData"
             }
           }
         ],
@@ -87,7 +87,7 @@
             "description": "JSON data for updating an existing album",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateAlbumData"
+              "$ref": "#/definitions/AlbumData"
             }
           }
         ],
@@ -147,10 +147,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Album data.",
-            "schema": {
-              "$ref": "#/definitions/Album"
-            }
+            "description": "Album deleted successfully."
           },
           "404": {
             "description": "Album not found."
@@ -178,7 +175,7 @@
             "description": "JSON data for creating a new genre",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateGenreData"
+              "$ref": "#/definitions/GenreData"
             }
           }
         ],
@@ -240,7 +237,7 @@
             "description": "JSON data for updating an existing genre",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateGenreData"
+              "$ref": "#/definitions/GenreData"
             }
           }
         ],
@@ -331,7 +328,7 @@
             "description": "JSON data for creating a new artist",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateArtistData"
+              "$ref": "#/definitions/ArtistData"
             }
           }
         ],
@@ -393,7 +390,7 @@
             "description": "JSON data for updating an existing artist",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateArtistData"
+              "$ref": "#/definitions/ArtistData"
             }
           }
         ],
@@ -481,7 +478,7 @@
             "description": "JSON data for creating a new song",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/CreateSongData"
+              "$ref": "#/definitions/SongData"
             }
           }
         ],
@@ -587,7 +584,7 @@
             "description": "JSON data for updating an existing song",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateSongData"
+              "$ref": "#/definitions/SongData"
             }
           }
         ],
@@ -709,7 +706,7 @@
             "description": "JSON data for creating a new playlist",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreatePlaylistData"
+              "$ref": "#/definitions/PlaylistData"
             }
           }
         ],
@@ -771,7 +768,7 @@
             "description": "JSON data for updating an existing playlist",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdatePlaylistData"
+              "$ref": "#/definitions/PlaylistData"
             }
           }
         ],
@@ -940,7 +937,7 @@
               "description": "JSON data for creating a new user",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/CreateUserData"
+                "$ref": "#/definitions/UserData"
               }
             }
           ],
@@ -1002,7 +999,7 @@
               "description": "JSON data for updating an existing user",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/UpdateUserData"
+                "$ref": "#/definitions/UserData"
               }
             }
           ],
@@ -1179,27 +1176,7 @@
       }
   },
     "definitions": {
-      "CreateAlbumData": {
-        "type": "object",
-        "properties": {
-          "Title": {
-            "type": "string"
-          },
-          "Publishing_Date": {
-            "type": "string"
-          },
-          "Cover": {
-            "type": "string"
-          },
-          "ArtistID": {
-            "type": "integer"
-          },
-          "GenreID": {
-            "type": "integer"
-          }
-        }
-      },
-      "UpdateAlbumData": {
+      "AlbumData": {
         "type": "object",
         "properties": {
           "Title": {
@@ -1242,15 +1219,7 @@
           }
         }
       },
-      "CreateGenreData": {
-        "type": "object",
-        "properties": {
-          "Name": {
-            "type": "string"
-          }
-        }
-      },
-      "UpdateGenreData": {
+      "GenreData": {
         "type": "object",
         "properties": {
           "Name": {
@@ -1269,24 +1238,7 @@
           }
         }
       },
-      "CreateArtistData": {
-        "type": "object",
-        "properties": {
-          "Full_Name": {
-            "type": "string"
-          },
-          "Country": {
-            "type": "string"
-          },
-          "Photo": {
-            "type": "string"
-          },
-          "GenreID": {
-            "type": "integer"
-          }
-        }
-      },
-      "UpdateArtistData": {
+      "ArtistData": {
         "type": "object",
         "properties": {
           "Full_Name": {
@@ -1323,27 +1275,7 @@
           }
         }
       },
-      "CreateSongData": {
-        "type": "object",
-        "properties": {
-          "Title": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "Artist": {
-            "type": "integer"
-          },
-          "Album": {
-            "type": "integer"
-          },
-          "Song": {
-            "type": "string"
-          }
-        }
-      },
-      "UpdateSongData": {
+      "SongData": {
         "type": "object",
         "properties": {
           "Title": {
@@ -1502,7 +1434,7 @@
               }
             }
           }},
-      "CreatePlaylistData": {
+      "PlaylistData": {
         "type": "object",
         "properties": {
           "Name": {
@@ -1510,14 +1442,6 @@
           },
           "UserID": {
             "type": "integer"
-          }
-        }
-      },
-      "UpdatePlaylistData": {
-        "type": "object",
-        "properties": {
-          "Name": {
-            "type": "string"
           }
         }
       },
@@ -1570,24 +1494,7 @@
 
         }
       },
-      "CreateUserData": {
-        "type": "object",
-        "properties": {
-          "Name": {
-            "type": "string"
-          },
-          "Surname": {
-            "type": "string"
-          },
-          "Username": {
-            "type": "string"
-          },
-          "Email": {
-            "type": "string"
-          }
-        }
-      },
-      "UpdateUserData": {
+      "UserData": {
         "type": "object",
         "properties": {
           "Name": {
