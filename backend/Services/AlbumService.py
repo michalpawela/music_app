@@ -3,7 +3,7 @@ from Models.AlbumModel import Album
 from extensions import db
 
 
-def update_album(album_id, title, publishingDate, cover, artistId, genreId):
+def update_album(album_id, title, publishing_date, cover, artist_id, genre_id):
     existing_album = Album.query.get(album_id)
     if existing_album is None:
         return None
@@ -11,14 +11,14 @@ def update_album(album_id, title, publishingDate, cover, artistId, genreId):
         # Update the album attributes if the corresponding data is provided in the request
         if title:
             existing_album.Title = title
-        if publishingDate:
-            existing_album.Publishing_Date = publishingDate
+        if publishing_date:
+            existing_album.Publishing_Date = publishing_date
         if cover:
             existing_album.Cover = cover
-        if artistId:
-            existing_album.ArtistID = artistId
-        if genreId:
-            existing_album.GenreID = genreId
+        if artist_id:
+            existing_album.ArtistID = artist_id
+        if genre_id:
+            existing_album.GenreID = genre_id
         # Commit the changes to the database
         db.session.commit()
         # Return the updated album data
@@ -77,9 +77,9 @@ def delete_album(album_id):
         return album
 
 
-def create_album(title, publishingDate, cover, artistId, genreId):
+def create_album(title, publishing_date, cover, artist_id, genre_id):
     # Create a new album object
-    new_album = Album(Title=title, Publishing_Date=publishingDate, Cover=cover, ArtistID=artistId, GenreID=genreId)
+    new_album = Album(Title=title, Publishing_Date=publishing_date, Cover=cover, ArtistID=artist_id, GenreID=genre_id)
 
     # Add the new album to the database
     db.session.add(new_album)

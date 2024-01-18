@@ -11,13 +11,13 @@ def update_album(album_id):
     # Get data from the request
     data = request.json  # Assuming the data is sent in JSON format
     title = data.get('Title')
-    publishingDate = data.get('Publishing_Date')
+    publishing_date = data.get('Publishing_Date')
     cover = data.get('Cover')
-    artistId = data.get('ArtistID')
-    genreId = data.get('GenreID')
+    artist_id = data.get('ArtistID')
+    genre_id = data.get('GenreID')
 
     # Find the existing album in the database
-    album_data = AlbumService.update_album(album_id, title, publishingDate, cover, artistId, genreId)
+    album_data = AlbumService.update_album(album_id, title, publishing_date, cover, artist_id, genre_id)
     if album_data is None:
         return jsonify({'error': 'Album not found'}), 404  # 404 Not Found status code
     else:
@@ -39,12 +39,12 @@ def create_album():
     # Get data from the request
     data = request.json  # Assuming the data is sent in JSON format
     title = data.get('Title')
-    publishingDate = data.get('Publishing_Date')
+    publishing_date = data.get('Publishing_Date')
     cover = data.get('Cover')
-    artistId = data.get('ArtistID')
-    genreId = data.get('GenreID')
+    artist_id = data.get('ArtistID')
+    genre_id = data.get('GenreID')
 
-    album_data = AlbumService.create_album(title, publishingDate, cover, artistId, genreId)
+    album_data = AlbumService.create_album(title, publishing_date, cover, artist_id, genre_id)
 
     return jsonify({'album': album_data}), 201  # 201 Created status code
 
@@ -53,7 +53,7 @@ def create_album():
 def get_album(album_id):
     album = AlbumService.get_album(album_id)
 
-    if(album == None):
+    if album is None:
         return jsonify({'error': 'Album not found'}), 404
 
     return jsonify({'album': album}), 200
